@@ -16,6 +16,7 @@ def add_job(request):
         if form.is_valid():
             form.save()
             return redirect(reverse('all_jobs'))
+    # Empty form instantiation in order to make error messages working correctly
     else: 
         form = JobForm()
 
