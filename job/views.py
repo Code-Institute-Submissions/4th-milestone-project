@@ -1,7 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
+from .forms import JobForm
+from .models import Job
 
 
-def view_job(request):
+def all_jobs(request):
     """ A view to return the job page """
 
     return render(request, 'job/job.html')
+
+def add_job(request):
+    form = JobForm(request.GET)
+    
+    if request.method == 'POST':
+        form = JobForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('all_jobs'))
+    else: 
+        form = JobForm()
+
+    template = 'job/add_job.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
