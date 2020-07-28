@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse
+from django.contrib.auth.decorators import login_required
 from .forms import JobForm
 from .models import Job
 
@@ -8,6 +9,7 @@ def all_jobs(request):
 
     return render(request, 'job/job.html')
 
+@login_required
 def add_job(request):
     form = JobForm(request.GET)
     
