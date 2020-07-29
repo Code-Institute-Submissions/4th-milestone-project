@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     # codejob views
     'home',
-    'job',
+    'jobs',
+    'profiles',
     # Other
     'crispy_forms',
     'allauth',
@@ -73,7 +74,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', # Required by allauth
+                'django.template.context_processors.request',  # Required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -160,4 +161,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-

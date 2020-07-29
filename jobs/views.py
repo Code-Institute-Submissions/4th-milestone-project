@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import JobForm
-from .models import Job, Author
-from .utils import get_author
+from .forms import JobsForm
+from .models import Jobs
+from profiles.models import UserProfile
+from profiles.utils import get_profile
 
 
 def all_jobs(request):
@@ -17,11 +18,11 @@ def all_jobs(request):
 @login_required
 def add_job(request):
     """ A view to add a new job """
-    form = JobForm(request.GET)
-    author = get_author(request.user)
+    form = JobsForm(request.GET)
+    author = get_profile(request.user)
 
     if request.method == 'POST':
-        form = JobForm(request.POST)
+        form = JobsForm(request.POST)
         if form.is_valid():
             form.instance.author = author
             form.save()
@@ -33,7 +34,7 @@ def add_job(request):
                             'Make sure you entered valid data.'))
     # Empty form instantiation in order to make Bootstrap error messages working correctly
     else:
-        form = JobForm()
+        form = JobsForm()
 
     template = 'job/add_job.html'
     context = {
@@ -47,7 +48,7 @@ def add_job(request):
 def job_profile(request, job_id):
     """ A view to show job profile """
 
-    job = get_object_or_404(Job, pk=job_id)
+    job = get_object_or_404(Jobs, pk=job_id)
 
     template = 'job/job_profile.html'
     context = {
@@ -61,14 +62,14 @@ def job_profile(request, job_id):
 @login_required
 def edit_job(request, job_id):
     """ A view to edit a job profile """
-    job = get_object_or_404(Job, pk=job_id)
+    job = get_object_or_404(Jobs, pk=job_id)
 
     if request.user.id != job.author.id:
         messages.error(request, 'You can only edit your own job profiles')
         return redirect(reverse('view_home'))
 
     if request.method == 'POST':
-        form = JobForm(request.POST, instance=job)
+        form = JobsForm(request.POST, instance=job)
         if form.is_valid():
             form.save()
             messages.success(
@@ -79,7 +80,7 @@ def edit_job(request, job_id):
                            ('Could not update job profile. '
                             'Make sure you entered valid data.'))
     else:
-        form = JobForm(instance=job)
+        form = JobsForm(instance=job)
         messages.info(request, f'You are editing {job.title}')
 
     template = 'job/edit_job.html'
@@ -95,7 +96,7 @@ def edit_job(request, job_id):
 @login_required
 def delete_job(request, job_id):
     """ A view to delete a job profile """
-    job = get_object_or_404(Job, pk=job_id)
+    job = get_object_or_404(Jobs, pk=job_id)
 
     if request.user.id != job.author.id:
         messages.error(request, 'You can only delete your own job profiles')

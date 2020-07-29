@@ -2,6 +2,8 @@
 .venv/
 .vscode/
 
+
 #files
 *.sqlite3
 *__pycache__
+*.xlsx
