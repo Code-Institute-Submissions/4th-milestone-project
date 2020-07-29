@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import JobForm
@@ -24,7 +25,7 @@ def add_job(request):
             form.instance.author = author
             form.save()
             return redirect(reverse('all_jobs'))
-    # Empty form instantiation in order to make error messages working correctly
+    # Empty form instantiation in order to make Bootstrap error messages working correctly
     else: 
         form = JobForm()
 
@@ -54,17 +55,23 @@ def edit_job(request, job_id):
     """ A view to edit a job profile """
     job = get_object_or_404(Job, pk=job_id)
 
-    if request.user.id != job.author:
-        return redirect(reverse('view_home'))
-    
+    if request.user.id != job.author.id:
+        messages.error(request, 'You can only edit your own job profiles')
+        return redirect(reverse('view_home'))  
+
     if request.method == 'POST':
         form = JobForm(request.POST, instance=job)
         if form.is_valid():
             form.save()
+            messages.success(request, 'You have successfully updated the job profile!')
             return redirect(reverse('job_profile', args=[job.id]))
-
+        else:
+            messages.error(request,
+                        ('Could not update job profile. '
+                            'Make sure your entered valid data.'))
     else:
         form = JobForm(instance=job)
+        messages.info(request, f'You are editing {job.title}')
 
     template = 'job/edit_job.html'
     context = {
