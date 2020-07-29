@@ -13,6 +13,7 @@ def all_jobs(request):
 
     return render(request, template)
 
+
 @login_required
 def add_job(request):
     """ A view to add a new job """
@@ -28,10 +29,10 @@ def add_job(request):
             return redirect(reverse('all_jobs'))
         else:
             messages.error(request,
-                        ('Could not add the new job. '
+                           ('Could not add the new job. '
                             'Make sure you entered valid data.'))
     # Empty form instantiation in order to make Bootstrap error messages working correctly
-    else: 
+    else:
         form = JobForm()
 
     template = 'job/add_job.html'
@@ -41,6 +42,7 @@ def add_job(request):
     }
 
     return render(request, template, context)
+
 
 def job_profile(request, job_id):
     """ A view to show job profile """
@@ -55,6 +57,7 @@ def job_profile(request, job_id):
 
     return render(request, template, context)
 
+
 @login_required
 def edit_job(request, job_id):
     """ A view to edit a job profile """
@@ -62,17 +65,18 @@ def edit_job(request, job_id):
 
     if request.user.id != job.author.id:
         messages.error(request, 'You can only edit your own job profiles')
-        return redirect(reverse('view_home'))  
+        return redirect(reverse('view_home'))
 
     if request.method == 'POST':
         form = JobForm(request.POST, instance=job)
         if form.is_valid():
             form.save()
-            messages.success(request, 'You have successfully updated the job profile!')
+            messages.success(
+                request, 'You have successfully updated the job profile!')
             return redirect(reverse('job_profile', args=[job.id]))
         else:
             messages.error(request,
-                        ('Could not update job profile. '
+                           ('Could not update job profile. '
                             'Make sure you entered valid data.'))
     else:
         form = JobForm(instance=job)
@@ -86,3 +90,17 @@ def edit_job(request, job_id):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def delete_job(request, job_id):
+    """ A view to delete a job profile """
+    job = get_object_or_404(Job, pk=job_id)
+
+    if request.user.id != job.author.id:
+        messages.error(request, 'You can only delete your own job profiles')
+        return redirect(reverse('view_home'))
+
+    job.delete()
+    messages.success(request, 'You have successfully deleted the job profile!')
+    return redirect(reverse('all_jobs'))
