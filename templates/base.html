@@ -27,7 +27,11 @@
     {% block extra_js %}
     {% endblock %}
 
-    <title>codejob.ie {% block extra_title %}{% endblock %}</title>
+    {% if title %}
+        <title>codejob.ie - {{ title }}</title>
+    {% else %}
+        <title>codejob.ie</title>
+    {% endif %}
   </head>
   <body>
     <header class="container-fluid">
