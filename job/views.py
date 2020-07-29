@@ -48,3 +48,29 @@ def job_profile(request, job_id):
     }
 
     return render(request, template, context)
+
+@login_required
+def edit_job(request, job_id):
+    """ A view to edit a job profile """
+    job = get_object_or_404(Job, pk=job_id)
+
+    if request.user.id != job.author:
+        return redirect(reverse('view_home'))
+    
+    if request.method == 'POST':
+        form = JobForm(request.POST, instance=job)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('job_profile', args=[job.id]))
+
+    else:
+        form = JobForm(instance=job)
+
+    template = 'job/edit_job.html'
+    context = {
+        'title': 'Edit job profile',
+        'form': form,
+        'job': job,
+    }
+
+    return render(request, template, context)
