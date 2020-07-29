@@ -24,7 +24,12 @@ def add_job(request):
         if form.is_valid():
             form.instance.author = author
             form.save()
+            messages.success(request, 'You have successfully added a new job!')
             return redirect(reverse('all_jobs'))
+        else:
+            messages.error(request,
+                        ('Could not add the new job. '
+                            'Make sure you entered valid data.'))
     # Empty form instantiation in order to make Bootstrap error messages working correctly
     else: 
         form = JobForm()
@@ -68,7 +73,7 @@ def edit_job(request, job_id):
         else:
             messages.error(request,
                         ('Could not update job profile. '
-                            'Make sure your entered valid data.'))
+                            'Make sure you entered valid data.'))
     else:
         form = JobForm(instance=job)
         messages.info(request, f'You are editing {job.title}')
