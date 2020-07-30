@@ -10,7 +10,7 @@ from profiles.utils import get_profile
 
 def all_jobs(request):
     """ A view to return the job page """
-    template = 'job/job.html'
+    template = 'jobs/job.html'
 
     return render(request, template)
 
@@ -36,7 +36,7 @@ def add_job(request):
     else:
         form = JobsForm()
 
-    template = 'job/add_job.html'
+    template = 'jobs/add_job.html'
     context = {
         'title': 'Add new job',
         'form': form,
@@ -50,7 +50,7 @@ def job_profile(request, job_id):
 
     job = get_object_or_404(Jobs, pk=job_id)
 
-    template = 'job/job_profile.html'
+    template = 'jobs/job_profile.html'
     context = {
         'title': 'Job profile',
         'job': job,
@@ -83,7 +83,7 @@ def edit_job(request, job_id):
         form = JobsForm(instance=job)
         messages.info(request, f'You are editing {job.title}')
 
-    template = 'job/edit_job.html'
+    template = 'jobs/edit_job.html'
     context = {
         'title': 'Edit job profile',
         'form': form,
