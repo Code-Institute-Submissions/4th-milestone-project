@@ -1,5 +1,5 @@
-from .models import UserProfile
+from .models import User
 
 
 def get_profile(user):
-    return UserProfile.objects.filter(user=user).first()
+    return User.objects.filter(user=user).first()

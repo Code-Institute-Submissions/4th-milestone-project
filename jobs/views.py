@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import JobsForm
 from .models import Jobs
-from profiles.models import UserProfile
 from profiles.utils import get_profile
 
 

@@ -2,11 +2,15 @@
 {% load static %}
 
 {% block content %}
-    <div class="container">
+    <h1>Welcome {{ first_name }}</h1>
+
+ <div class="container">
         <form action="{% url 'profile' %}" method="POST" novalidate>
             {% csrf_token %}
-            {{ form|crispy }}
+            
+            {{ user_form|crispy }}
+            {{ profile_form|crispy }}
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-    </div>
+    </div>  
 {% endblock %}

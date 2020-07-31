@@ -1,17 +1,16 @@
 from django.contrib import admin
-from .models import UserProfile, UserType
+from .models import User, JobSeekerProfile, RecruiterProfile
 
 
-class UserProfileAdmin(admin.ModelAdmin):
+class GenericProfileAdmin(admin.ModelAdmin):
     '''' Show user profile's fields in Admin'''
     list_display = (
-        'user',
+        'username',
         'first_name',
         'last_name',
-        'user_type',
     )
 
 
-# Registering models to Admin
-admin.site.register(UserProfile, UserProfileAdmin)
-admin.site.register(UserType)
+admin.site.register(User, GenericProfileAdmin)
+admin.site.register(JobSeekerProfile)
+admin.site.register(RecruiterProfile)
