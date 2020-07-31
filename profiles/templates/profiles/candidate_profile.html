@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>Welcome candidate {{ first_name }}</h1>
+
+ <div class="container">
+        
+        <form action="{% url 'candidate_profile' %}" method="POST" novalidate>
+            {% csrf_token %}
+            
+            {{ user_form|crispy }}
+            {{ profile_form|crispy }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>  
+{% endblock %}

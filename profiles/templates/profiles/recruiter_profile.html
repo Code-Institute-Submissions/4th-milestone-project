@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block content %}
-    <h1>Welcome {{ first_name }}</h1>
+    <h1>Welcome recruiter {{ first_name }}</h1>
 
  <div class="container">
-        <form action="{% url 'profile' %}" method="POST" novalidate>
+        
+        <form action="{% url 'recruiter_profile'%}" method="POST" novalidate>
             {% csrf_token %}
             
             {{ user_form|crispy }}
