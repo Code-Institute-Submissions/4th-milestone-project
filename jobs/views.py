@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import JobsForm
 from .models import Jobs
-from profiles.utils import get_profile
 
 
 def all_jobs(request):
@@ -18,12 +17,11 @@ def all_jobs(request):
 def add_job(request):
     """ A view to add a new job """
     form = JobsForm(request.GET)
-    author = get_profile(request.user)
 
     if request.method == 'POST':
         form = JobsForm(request.POST)
         if form.is_valid():
-            form.instance.author = author
+            form.instance.author = request.user
             form.save()
             messages.success(request, 'You have successfully added a new job!')
             return redirect(reverse('all_jobs'))

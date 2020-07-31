@@ -1,5 +1,6 @@
 from django.db import models
 from profiles.models import User
+from django.conf import settings
 
 
 class Jobs(models.Model):
@@ -10,7 +11,7 @@ class Jobs(models.Model):
     description = models.CharField(max_length=1024)
     # Delete job when user is deleted
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True, blank=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     # Date is created when job is created and can't be modified
     date_added = models.DateTimeField(
         auto_now_add=True, editable=False, blank=True)

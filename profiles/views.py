@@ -9,13 +9,23 @@ from .forms import UserForm, JobSeekerProfileForm, RecruiterProfileForm
 @login_required
 def profile(request):
     """ Display the user's profile. """
-    profile = get_object_or_404(User, pk=request.user.id)
 
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=profile)
-        profile_form = JobSeekerProfileForm(request.POST, instance=profile)
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = JobSeekerProfileForm(
+            request.POST, instance=request.user.jobseekerprofile)
         if user_form.is_valid() and profile_form.is_valid():
             forms = user_form.save(commit=False)
+            forms.save()
+            forms.jobseekerprofile.work_experience = profile_form.cleaned_data.get(
+                'work_experience')
+            forms.jobseekerprofile.education = profile_form.cleaned_data.get(
+                'education')
+            forms.jobseekerprofile.languages = profile_form.cleaned_data.get(
+                'languages')
+            forms.jobseekerprofile.coding_languages = profile_form.cleaned_data.get(
+                'coding_languages')
+
             forms.jobseekerprofile.save()
             messages.success(request, 'Profile updated successfully')
             return redirect(reverse('view_home'))
@@ -24,8 +34,9 @@ def profile(request):
                            ('Update failed. Please ensure '
                             'the form is valid.'))
     else:
-        user_form = UserForm(instance=profile)
-        profile_form = JobSeekerProfileForm(instance=profile)
+        user_form = UserForm(instance=request.user)
+        profile_form = JobSeekerProfileForm(
+            instance=request.user.jobseekerprofile)
 
     template = 'profiles/user_profile.html'
     context = {
