@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'profiles',
     # Other
     'crispy_forms',
+    'django_cleanup',
     'allauth',
     'allauth.account',
     'allauth.socialaccount'
