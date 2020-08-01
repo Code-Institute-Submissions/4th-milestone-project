@@ -21,7 +21,9 @@ def candidate_profile(request):
     """ Display job seeker's profile. """
 
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
+        user_form = UserForm(request.POST,
+                             request.FILES,
+                             instance=request.user)
         profile_form = JobSeekerProfileForm(
             request.POST, instance=request.user.jobseekerprofile)
         if user_form.is_valid() and profile_form.is_valid():
@@ -64,7 +66,9 @@ def recruiter_profile(request):
     """ Display recruiter's profile. """
 
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
+        user_form = UserForm(request.POST,
+                             request.FILES,
+                             instance=request.user)
         profile_form = RecruiterProfileForm(
             request.POST, instance=request.user.recruiterprofile)
         if user_form.is_valid() and profile_form.is_valid():
