@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, get_user
-from .models import User, JobSeekerProfile, RecruiterProfile
-from .forms import UserForm, JobSeekerProfileForm, RecruiterProfileForm
+from .models import User, JobSeekerProfile, RecruiterProfile, WorkExperience
+from .forms import UserForm, JobSeekerProfileForm, RecruiterProfileForm, WorkExperienceForm
 
 
 @login_required
@@ -20,25 +20,36 @@ def login_success(request):
 def candidate_profile(request):
     """ Display job seeker's profile. """
 
+    job_seeker_profile = request.user.jobseekerprofile
+
+    work_experience = get_object_or_404(
+        WorkExperience, pk=job_seeker_profile.id)
+
     if request.method == 'POST':
+
         user_form = UserForm(request.POST,
                              request.FILES,
                              instance=request.user)
-        profile_form = JobSeekerProfileForm(
-            request.POST, instance=request.user.jobseekerprofile)
-        if user_form.is_valid() and profile_form.is_valid():
-            forms = user_form.save(commit=False)
-            forms.save()
-            forms.jobseekerprofile.work_experience = profile_form.cleaned_data.get(
-                'work_experience')
-            forms.jobseekerprofile.education = profile_form.cleaned_data.get(
-                'education')
-            forms.jobseekerprofile.languages = profile_form.cleaned_data.get(
-                'languages')
-            forms.jobseekerprofile.coding_languages = profile_form.cleaned_data.get(
-                'coding_languages')
 
-            forms.jobseekerprofile.save()
+        profile_form = JobSeekerProfileForm(
+            request.POST, instance=job_seeker_profile)
+
+        work_experience_form = WorkExperienceForm(
+            request.POST, instance=work_experience)
+
+        if user_form.is_valid() and profile_form.is_valid() and work_experience_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            work_experience_form.job_title = work_experience_form.cleaned_data.get(
+                'job_title')
+            work_experience_form.start_date = work_experience_form.cleaned_data.get(
+                'start_date')
+            work_experience_form.end_date = work_experience_form.cleaned_data.get(
+                'end_date')
+
+            work_experience_form.save()
+
             messages.success(request, 'Profile updated successfully')
             return redirect(reverse('view_home'))
         else:
@@ -49,12 +60,16 @@ def candidate_profile(request):
         user_form = UserForm(instance=request.user)
         profile_form = JobSeekerProfileForm(
             instance=request.user.jobseekerprofile)
+        work_experience_form = WorkExperienceForm(
+            instance=work_experience)
 
     first_name = request.user.first_name
+
     template = 'profiles/candidate_profile.html'
     context = {
         'user_form': user_form,
         'profile_form': profile_form,
+        'work_experience_form': work_experience_form,
         'first_name': first_name,
     }
 

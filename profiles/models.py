@@ -4,14 +4,13 @@ from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from PIL import Image
+import datetime
 
 
 class User(AbstractUser):
-    location = models.CharField(max_length=25)
     phone_number = models.CharField(max_length=15)
-    job_title = models.CharField(max_length=50)
     about_me = models.TextField(max_length=500)
-    profile_image = models.ImageField(default='default.jpg',
+    profile_image = models.ImageField(default='default.png',
                                       upload_to='profile-images/', blank=True, null=True)
     is_job_seeker = models.BooleanField(default=True)
 
@@ -21,14 +20,26 @@ class User(AbstractUser):
 
 class JobSeekerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    work_experience = models.TextField(max_length=500)
-    education = models.TextField(max_length=500)
-    languages = models.TextField(max_length=500)
-    coding_languages = models.TextField(max_length=500)
+    location = models.CharField(max_length=50)
+    # education = models.TextField(max_length=500)
+    # languages = models.TextField(max_length=500)
+    # coding_languages = models.TextField(max_length=500)
+
+
+class WorkExperience(models.Model):
+    experience_item = models.ForeignKey(
+        JobSeekerProfile, on_delete=models.CASCADE, null=True, blank=True)
+    job_title = models.CharField(max_length=50)
+    start_date = models.DateField(default=datetime.date.today)
+    end_date = models.DateField(default=datetime.date.today)
+
+    def __str__(self):
+        return self.job_title
 
 
 class RecruiterProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    position = models.CharField(max_length=50)
     company_name = models.CharField(max_length=50)
     company_address1 = models.CharField(max_length=50)
     company_address2 = models.CharField(max_length=50, blank=True)
@@ -52,6 +63,7 @@ def save_user_profile(sender, instance, **kwargs):
 
     if instance.is_job_seeker:
         instance.jobseekerprofile.save()
+
     else:
         instance.recruiterprofile.save()
 
