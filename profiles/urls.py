@@ -8,9 +8,13 @@ urlpatterns = [
     #path('recruiter-profile/', views.recruiter_profile, name='recruiter_profile'),
     path('edit-candidate-profile/', views.edit_candidate_profile,
          name='edit_candidate_profile'),
-    path('edit-work-experience/', views.edit_work_experience,
+    path('candidate-profile/edit-work-experience/', views.edit_work_experience,
          name='edit_work_experience'),
-    path('delete/<int:experience_id>/', views.delete_work_experience,
+    path('candidate-profile/edit-work-experience/delete/<int:experience_id>/', views.delete_work_experience,
          name='delete_work_experience'),
+    path('candidate-profile/edit-education/', views.edit_education,
+         name='edit_education'),
+    path('candidate-profile/edit-education/delete/<int:education_id>/', views.delete_education,
+         name='delete_education'),
 
 ]

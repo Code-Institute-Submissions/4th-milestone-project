@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>Welcome candidate {{ first_name }}</h1>
+
+ <div class="container">
+    
+        <form class="form-inline justify-content-between mb-3 action="{% url 'edit_education' %}" method="POST" novalidate>
+            {% csrf_token %}
+
+             {{ form|crispy }} 
+        
+            
+            <button id="add-button" type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+        <ul class="list-group t20">
+            {% for item in education_list %}
+                <div class="card mb-3">
+                    <div class="card-body">
+
+                    {{ item.study}}
+                    {{ item.location}}
+                    {{ item.education_institute}}
+                    {{ item.start_date}}
+                    {{ item.end_date}}
+                    <a href="{% url 'delete_education' item.id %}" class="close float-right">
+                        <span aria-hidden="true">&times;</span></a>
+                </div>
+            </div>
+
+            {% endfor %}
+        </ul 
+
+    </div>  
+{% endblock %}

@@ -42,6 +42,23 @@ class WorkExperience(models.Model):
         ordering = ['-end_date']
 
 
+class Education(models.Model):
+    education_item = models.ForeignKey(
+        JobSeekerProfile, on_delete=models.CASCADE, null=True, blank=True)
+    study = models.CharField(max_length=50)
+    location = models.CharField(max_length=50, null=True, blank=True)
+    education_institute = models.CharField(
+        max_length=50, null=True, blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    def __str__(self):
+        return self.study
+
+    class Meta:
+        ordering = ['-end_date']
+
+
 class RecruiterProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     position = models.CharField(max_length=50)

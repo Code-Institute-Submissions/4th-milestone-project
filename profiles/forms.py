@@ -1,5 +1,5 @@
 from django import forms
-from .models import User, JobSeekerProfile, RecruiterProfile, WorkExperience
+from .models import User, JobSeekerProfile, RecruiterProfile, WorkExperience, Education
 
 
 class UserForm(forms.ModelForm):
@@ -66,6 +66,28 @@ class WorkExperienceForm(forms.ModelForm):
             'job_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Job title', 'aria-describedby': 'add-button'}),
             'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Location', 'aria-describedby': 'add-button'}),
             'company': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company', 'aria-describedby': 'add-button'}),
+            'start_date': forms.TextInput(attrs={'class': 'form-control', 'aria-describedby': 'add-button'}),
+            'end_date': forms.TextInput(attrs={'class': 'form-control', 'aria-describedby': 'add-button'}),
+        }
+
+
+class EducationForm(forms.ModelForm):
+    class Meta:
+        model = Education
+        fields = ('study', 'location', 'education_institute', 'start_date', 'end_date',
+                  )
+        labels = {
+            'study': 'Study',
+            'location': 'Location',
+            'education_institute': 'Education institute',
+            'start_date': 'Start date',
+            'end_date': 'End date',
+        }
+        widget = {
+
+            'study': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Study', 'aria-describedby': 'add-button'}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Location', 'aria-describedby': 'add-button'}),
+            'education_institute': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Education institute', 'aria-describedby': 'add-button'}),
             'start_date': forms.TextInput(attrs={'class': 'form-control', 'aria-describedby': 'add-button'}),
             'end_date': forms.TextInput(attrs={'class': 'form-control', 'aria-describedby': 'add-button'}),
         }

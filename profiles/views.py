@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, get_user
-from .models import User, JobSeekerProfile, RecruiterProfile, WorkExperience
-from .forms import UserForm, JobSeekerProfileForm, RecruiterProfileForm, WorkExperienceForm
+from .models import User, JobSeekerProfile, RecruiterProfile, WorkExperience, Education
+from .forms import UserForm, JobSeekerProfileForm, RecruiterProfileForm, WorkExperienceForm, EducationForm
 
 
 @login_required
@@ -117,6 +117,58 @@ def delete_work_experience(request, experience_id):
         messages.success(
             request, 'Your work experience is succesfully deleted.')
         return redirect(reverse('edit_work_experience'))
+
+
+@ login_required
+def edit_education(request):
+
+    job_seeker = JobSeekerProfile.objects.filter(pk=request.user.id).first()
+
+    if request.method == 'POST':
+
+        form = EducationForm(
+            request.POST)
+
+        if form.is_valid():
+            form.instance.education_item = job_seeker
+            form.save()
+
+            messages.success(request, 'Work experience updated successfully')
+            return redirect(reverse('edit_education'))
+        else:
+            messages.error(request,
+                           ('Update failed. Please ensure '
+                            'the form is valid.'))
+    else:
+        form = EducationForm()
+
+    education_list = Education.objects.filter(education_item=job_seeker)
+
+    template = 'profiles/edit_education.html'
+    context = {
+        'form': form,
+        'education_list': education_list,
+
+    }
+
+    return render(request, template, context)
+
+
+@ login_required
+def delete_education(request, education_id):
+    education_item = get_object_or_404(Education, pk=education_id)
+    job_seeker = JobSeekerProfile.objects.filter(pk=request.user.id).first()
+
+    if request.user != job_seeker.user:
+        messages.error(
+            request, 'You are not allowed to remove this eduction.')
+        return redirect(reverse('view_home'))
+
+    else:
+        education_item.delete()
+        messages.success(
+            request, 'Your education is succesfully deleted.')
+        return redirect(reverse('edit_education'))
 
 
 # @ login_required
