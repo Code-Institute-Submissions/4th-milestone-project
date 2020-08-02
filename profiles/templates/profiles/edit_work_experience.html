@@ -21,6 +21,8 @@
                     <div class="card-body">
 
                     {{ item.job_title}}
+                    {{ item.location}}
+                    {{ item.company}}
                     {{ item.start_date}}
                     {{ item.end_date}}
                     <a href="{% url 'delete_work_experience' item.id %}" class="close float-right">

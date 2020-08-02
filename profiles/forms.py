@@ -52,16 +52,20 @@ class RecruiterProfileForm(forms.ModelForm):
 class WorkExperienceForm(forms.ModelForm):
     class Meta:
         model = WorkExperience
-        fields = ('job_title', 'start_date', 'end_date',
+        fields = ('job_title', 'location', 'company', 'start_date', 'end_date',
                   )
         labels = {
             'job_title': 'Job title',
+            'location': 'Location',
+            'company': 'Company',
             'start_date': 'Start date',
             'end_date': 'End date',
         }
         widget = {
 
-            'job_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Fill in your work experience', 'aria-describedby': 'add-button'}),
+            'job_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Job title', 'aria-describedby': 'add-button'}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Location', 'aria-describedby': 'add-button'}),
+            'company': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company', 'aria-describedby': 'add-button'}),
             'start_date': forms.TextInput(attrs={'class': 'form-control', 'aria-describedby': 'add-button'}),
             'end_date': forms.TextInput(attrs={'class': 'form-control', 'aria-describedby': 'add-button'}),
         }

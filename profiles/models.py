@@ -30,6 +30,8 @@ class WorkExperience(models.Model):
     experience_item = models.ForeignKey(
         JobSeekerProfile, on_delete=models.CASCADE, null=True, blank=True)
     job_title = models.CharField(max_length=50)
+    location = models.CharField(max_length=50, null=True, blank=True)
+    company = models.CharField(max_length=50, null=True, blank=True)
     start_date = models.DateField()
     end_date = models.DateField()
 
