@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, JobSeekerProfile, RecruiterProfile
+from .models import User, JobSeekerProfile, RecruiterProfile, WorkExperience
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -14,3 +14,4 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(User, UserAdmin)
 admin.site.register(JobSeekerProfile)
 admin.site.register(RecruiterProfile)
+admin.site.register(WorkExperience)

@@ -5,14 +5,31 @@
     <h1>Welcome candidate {{ first_name }}</h1>
 
  <div class="container">
-        <img src="{{ user.profile_image.url }}">
-        <form action="{% url 'edit_work_experience' %}" method="POST" enctype="multipart/form-data" novalidate>
+    
+        <form class="form-inline justify-content-between mb-3 action="{% url 'edit_work_experience' %}" method="POST" novalidate>
             {% csrf_token %}
 
-             {{ work_experience_form|crispy }} 
-  
+             {{ form|crispy }} 
+        
             
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button id="add-button" type="submit" class="btn btn-primary">Add</button>
         </form>
+
+        <ul class="list-group t20">
+            {% for item in experience_list %}
+                <div class="card mb-3">
+                    <div class="card-body">
+
+                    {{ item.job_title}}
+                    {{ item.start_date}}
+                    {{ item.end_date}}
+                    <a href="{% url 'delete_work_experience' item.id %}" class="close float-right">
+                        <span aria-hidden="true">&times;</span></a>
+                </div>
+            </div>
+
+            {% endfor %}
+        </ul 
+
     </div>  
 {% endblock %}

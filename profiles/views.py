@@ -4,8 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, get_user
 from .models import User, JobSeekerProfile, RecruiterProfile, WorkExperience
 from .forms import UserForm, JobSeekerProfileForm, RecruiterProfileForm, WorkExperienceForm
-from django.http import JsonResponse
-from django.forms.models import model_to_dict
 
 
 @login_required
@@ -71,19 +69,17 @@ def edit_candidate_profile(request):
 
 @ login_required
 def edit_work_experience(request):
-    job_seeker_profile = request.user.jobseekerprofile.id
 
-    work_experience = get_object_or_404(
-        WorkExperience, pk=job_seeker_profile)
+    job_seeker = JobSeekerProfile.objects.filter(pk=request.user.id).first()
 
     if request.method == 'POST':
 
-        work_experience_form = WorkExperienceForm(
-            request.POST, instance=work_experience)
+        form = WorkExperienceForm(
+            request.POST)
 
-        if work_experience_form.is_valid():
-
-            work_experience_form.save()
+        if form.is_valid():
+            form.instance.experience_item = job_seeker
+            form.save()
 
             messages.success(request, 'Work experience updated successfully')
             return redirect(reverse('edit_work_experience'))
@@ -92,63 +88,83 @@ def edit_work_experience(request):
                            ('Update failed. Please ensure '
                             'the form is valid.'))
     else:
-        work_experience_form = WorkExperienceForm(
-            instance=work_experience)
+        form = WorkExperienceForm()
+
+    experience_list = WorkExperience.objects.filter(experience_item=job_seeker)
 
     template = 'profiles/edit_work_experience.html'
     context = {
-        'work_experience_form': work_experience_form,
+        'form': form,
+        'experience_list': experience_list,
+
     }
 
     return render(request, template, context)
 
 
 @ login_required
-def recruiter_profile(request):
-    """ Display recruiter's profile. """
+def delete_work_experience(request, experience_id):
+    experience_item = get_object_or_404(WorkExperience, pk=experience_id)
+    job_seeker = JobSeekerProfile.objects.filter(pk=request.user.id).first()
 
-    if request.method == 'POST':
-        user_form = UserForm(request.POST,
-                             request.FILES,
-                             instance=request.user)
-        profile_form = RecruiterProfileForm(
-            request.POST, instance=request.user.recruiterprofile)
-        if user_form.is_valid() and profile_form.is_valid():
-            forms = user_form.save(commit=False)
-            forms.save()
-            forms.recruiterprofile.company_name = profile_form.cleaned_data.get(
-                'company_name')
-            forms.recruiterprofile.company_address1 = profile_form.cleaned_data.get(
-                'company_address1')
-            forms.recruiterprofile.company_address2 = profile_form.cleaned_data.get(
-                'company_address2')
-            forms.recruiterprofile.company_city = profile_form.cleaned_data.get(
-                'company_city')
-            forms.recruiterprofile.company_ZIP = profile_form.cleaned_data.get(
-                'company_ZIP')
-            forms.recruiterprofile.company_state = profile_form.cleaned_data.get(
-                'company_state')
-            forms.recruiterprofile.company_country = profile_form.cleaned_data.get(
-                'company_country')
+    if request.user != job_seeker.user:
+        messages.error(
+            request, 'You are not allowed to remove this work experience.')
+        return redirect(reverse('view_home'))
 
-            forms.recruiterprofile.save()
-            messages.success(request, 'Profile updated successfully')
-            return redirect(reverse('view_home'))
-        else:
-            messages.error(request,
-                           ('Update failed. Please ensure '
-                            'the form is valid.'))
     else:
-        user_form = UserForm(instance=request.user)
-        profile_form = RecruiterProfileForm(
-            instance=request.user.recruiterprofile)
+        experience_item.delete()
+        messages.success(
+            request, 'Your work experience is succesfully deleted.')
+        return redirect(reverse('edit_work_experience'))
 
-    first_name = request.user.first_name
-    template = 'profiles/recruiter_profile.html'
-    context = {
-        'user_form': user_form,
-        'profile_form': profile_form,
-        'first_name': first_name,
-    }
 
-    return render(request, template, context)
+# @ login_required
+# def recruiter_profile(request):
+#     """ Display recruiter's profile. """
+
+#     if request.method == 'POST':
+#         user_form = UserForm(request.POST,
+#                              request.FILES,
+#                              instance=request.user)
+#         profile_form = RecruiterProfileForm(
+#             request.POST, instance=request.user.recruiterprofile)
+#         if user_form.is_valid() and profile_form.is_valid():
+#             forms = user_form.save(commit=False)
+#             forms.save()
+#             forms.recruiterprofile.company_name = profile_form.cleaned_data.get(
+#                 'company_name')
+#             forms.recruiterprofile.company_address1 = profile_form.cleaned_data.get(
+#                 'company_address1')
+#             forms.recruiterprofile.company_address2 = profile_form.cleaned_data.get(
+#                 'company_address2')
+#             forms.recruiterprofile.company_city = profile_form.cleaned_data.get(
+#                 'company_city')
+#             forms.recruiterprofile.company_ZIP = profile_form.cleaned_data.get(
+#                 'company_ZIP')
+#             forms.recruiterprofile.company_state = profile_form.cleaned_data.get(
+#                 'company_state')
+#             forms.recruiterprofile.company_country = profile_form.cleaned_data.get(
+#                 'company_country')
+
+#             forms.recruiterprofile.save()
+#             messages.success(request, 'Profile updated successfully')
+#             return redirect(reverse('view_home'))
+#         else:
+#             messages.error(request,
+#                            ('Update failed. Please ensure '
+#                             'the form is valid.'))
+#     else:
+#         user_form = UserForm(instance=request.user)
+#         profile_form = RecruiterProfileForm(
+#             instance=request.user.recruiterprofile)
+
+#     first_name = request.user.first_name
+#     template = 'profiles/recruiter_profile.html'
+#     context = {
+#         'user_form': user_form,
+#         'profile_form': profile_form,
+#         'first_name': first_name,
+#     }
+
+#     return render(request, template, context)

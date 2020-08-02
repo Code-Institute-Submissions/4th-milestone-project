@@ -59,6 +59,9 @@ class WorkExperienceForm(forms.ModelForm):
             'start_date': 'Start date',
             'end_date': 'End date',
         }
-        widgets = {
-            'job_title': forms.TextInput(attrs={'class': 'form-control'})
+        widget = {
+
+            'job_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Fill in your work experience', 'aria-describedby': 'add-button'}),
+            'start_date': forms.TextInput(attrs={'class': 'form-control', 'aria-describedby': 'add-button'}),
+            'end_date': forms.TextInput(attrs={'class': 'form-control', 'aria-describedby': 'add-button'}),
         }
