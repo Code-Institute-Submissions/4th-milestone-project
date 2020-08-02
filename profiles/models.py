@@ -5,6 +5,7 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from PIL import Image
 import datetime
+from multiselectfield import MultiSelectField
 
 
 class User(AbstractUser):
@@ -19,11 +20,39 @@ class User(AbstractUser):
 
 
 class JobSeekerProfile(models.Model):
+    LANGUAGE_CHOICES = (
+        ('English', 'English'),
+        ('Mandarin Chinese',
+         'Mandarin Chinese'),
+        ('Hindi', 'Hindi'),
+        ('Spanish', 'Spanish'),
+        ('French', 'French'),
+        ('Arabic', 'Arabic'),
+        ('Bengali', 'Bengali'),
+        ('Russian', 'Russian'),
+        ('Portuguese', 'Portuguese'),
+        ('Indonesian', 'Indonesian'),
+        ('Other', 'Other'),
+    )
+    CODING_LANGUAGE_CHOICES = (
+        ('JavaScript', 'JavaScript'),
+        ('Python', 'Python'),
+        ('Java', 'Java'),
+        ('PHP', 'PHP'),
+        ('C#', 'C#'),
+        ('C++', 'C++'),
+        ('TypeScript', 'TypeScript'),
+        ('Shell', 'Shell'),
+        ('C', 'C'),
+        ('Ruby', 'Ruby'),
+        ('Other', 'Other'),
+    )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=50)
-    # education = models.TextField(max_length=500)
-    # languages = models.TextField(max_length=500)
-    # coding_languages = models.TextField(max_length=500)
+    languages = MultiSelectField(
+        choices=LANGUAGE_CHOICES, blank=True)
+    coding_languages = MultiSelectField(
+        choices=CODING_LANGUAGE_CHOICES, blank=True)
 
 
 class WorkExperience(models.Model):
@@ -71,7 +100,7 @@ class RecruiterProfile(models.Model):
     company_country = models.CharField(max_length=50)
 
 
-@receiver(post_save, sender=User)
+@ receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
 
     if instance.is_job_seeker:
@@ -80,7 +109,7 @@ def create_user_profile(sender, instance, created, **kwargs):
         RecruiterProfile.objects.get_or_create(user=instance)
 
 
-@receiver(post_save, sender=User)
+@ receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
 
     if instance.is_job_seeker:

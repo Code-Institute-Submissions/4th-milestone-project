@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'jobs',
     'profiles',
     # Other
+    'multiselectfield',
     'crispy_forms',
     'django_cleanup',
     'allauth',

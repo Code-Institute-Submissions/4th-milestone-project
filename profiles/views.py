@@ -171,6 +171,17 @@ def delete_education(request, education_id):
         return redirect(reverse('edit_education'))
 
 
+# def language_list(request):
+#     language_list = Languages.objects.all()
+
+#     template = 'profiles/languages.html'
+#     context = {
+#         'language_list': language_list,
+
+#     }
+
+#     return render(request, template, context)
+
 # @ login_required
 # def recruiter_profile(request):
 #     """ Display recruiter's profile. """
