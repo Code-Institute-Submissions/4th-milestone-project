@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>Welcome candidate {{ first_name }}</h1>
+
+ <div class="container">
+        <img src="{{ user.profile_image.url }}">
+        <form action="{% url 'edit_work_experience' %}" method="POST" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+             {{ work_experience_form|crispy }} 
+  
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>  
+{% endblock %}

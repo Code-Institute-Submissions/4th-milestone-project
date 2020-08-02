@@ -59,3 +59,6 @@ class WorkExperienceForm(forms.ModelForm):
             'start_date': 'Start date',
             'end_date': 'End date',
         }
+        widgets = {
+            'job_title': forms.TextInput(attrs={'class': 'form-control'})
+        }

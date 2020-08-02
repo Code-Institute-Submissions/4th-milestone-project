@@ -2,18 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <h1>Welcome candidate {{ first_name }}</h1>
+    <h1>Welcome candidate {{ user.first_name }}</h1>
 
- <div class="container">
-        <img src="{{ user.profile_image.url }}">
-        <form action="{% url 'candidate_profile' %}" method="POST" enctype="multipart/form-data" novalidate>
-            {% csrf_token %}
-            
-            {{ user_form|crispy }}
-             {{ work_experience_form|crispy }} 
-            {{ profile_form|crispy }}
-            
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>  
+
 {% endblock %}

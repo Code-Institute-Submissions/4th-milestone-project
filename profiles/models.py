@@ -36,6 +36,9 @@ class WorkExperience(models.Model):
     def __str__(self):
         return self.job_title
 
+    class Meta:
+        ordering = ['-end_date']
+
 
 class RecruiterProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
