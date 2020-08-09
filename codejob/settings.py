@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'home',
     'jobs',
     'profiles',
+    'checkout',
     # Other
     'multiselectfield',
     'crispy_forms',
@@ -164,3 +165,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'profiles.User'
+
+
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')

@@ -13,6 +13,7 @@ class User(AbstractUser):
     about_me = models.TextField(max_length=500)
     profile_image = models.ImageField(default='default.png',
                                       upload_to='profile-images/', blank=True, null=True)
+    stripe_customer_id = models.CharField(max_length=50)
     is_job_seeker = models.BooleanField(default=True)
 
     def __str__(self):
