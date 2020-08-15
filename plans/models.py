@@ -1,6 +1,4 @@
 from django.db import models
-from profiles.models import RecruiterProfile
-
 
 PLAN_CHOICES = (
     ('Jobseeker plan', 'Jobseeker plan'),
@@ -22,7 +20,7 @@ class Plans(models.Model):
 
 class PlanSubscription(models.Model):
     recruiter_profile = models.ForeignKey(
-        RecruiterProfile, on_delete=models.CASCADE)
+        'profiles.RecruiterProfile', on_delete=models.CASCADE)
     stripe_subscription_id = models.CharField(max_length=50)
     active = models.BooleanField(default=True)
 

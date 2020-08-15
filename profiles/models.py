@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 from django.contrib.auth import get_user
 from django.db import models
 from django.db.models.signals import post_save, pre_save
@@ -6,6 +7,10 @@ from django.dispatch import receiver
 from PIL import Image
 import datetime
 from multiselectfield import MultiSelectField
+from plans.models import Plans
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class User(AbstractUser):
@@ -14,6 +19,9 @@ class User(AbstractUser):
     profile_image = models.ImageField(default='default.png',
                                       upload_to='profile-images/', blank=True, null=True)
     stripe_customer_id = models.CharField(max_length=50)
+    # In case the object plan type is deleted, the user shouldn't be deleted
+    plan_type = models.ForeignKey(
+        'plans.Plans', on_delete=models.SET_NULL, null=True)
     is_job_seeker = models.BooleanField(default=True)
 
     def __str__(self):
@@ -103,16 +111,21 @@ class RecruiterProfile(models.Model):
 
 @ receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
-
     if instance.is_job_seeker:
         JobSeekerProfile.objects.get_or_create(user=instance)
     else:
         RecruiterProfile.objects.get_or_create(user=instance)
 
+    if instance.stripe_customer_id is None or instance.stripe_customer_id == '':
+        new_customer_id = stripe.Customer.create(email=instance.email)
+        job_seeker_plan = Plans.objects.create(plan_type='Jobseeker plan')
+        instance.stripe_customer_id = new_customer_id['id']
+        instance.plan_type = job_seeker_plan
+        instance.save()
+
 
 @ receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-
     if instance.is_job_seeker:
         instance.jobseekerprofile.save()
 
