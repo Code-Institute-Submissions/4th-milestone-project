@@ -12,6 +12,72 @@ import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+LANGUAGE_CHOICES = (
+    ('English', 'English'),
+    ('Mandarin Chinese',
+        'Mandarin Chinese'),
+    ('Hindi', 'Hindi'),
+    ('Spanish', 'Spanish'),
+    ('French', 'French'),
+    ('Arabic', 'Arabic'),
+    ('Bengali', 'Bengali'),
+    ('Russian', 'Russian'),
+    ('Portuguese', 'Portuguese'),
+    ('Indonesian', 'Indonesian'),
+    ('Other', 'Other'),
+)
+
+CODING_LANGUAGE_CHOICES = (
+    ('JavaScript', 'JavaScript'),
+    ('Python', 'Python'),
+    ('Java', 'Java'),
+    ('PHP', 'PHP'),
+    ('C#', 'C#'),
+    ('C++', 'C++'),
+    ('TypeScript', 'TypeScript'),
+    ('Shell', 'Shell'),
+    ('C', 'C'),
+    ('Ruby', 'Ruby'),
+    ('Other', 'Other'),
+)
+
+CODING_LANGUAGE_CHOICES = (
+    ('JavaScript', 'JavaScript'),
+    ('Python', 'Python'),
+    ('Java', 'Java'),
+    ('PHP', 'PHP'),
+    ('C#', 'C#'),
+    ('C++', 'C++'),
+    ('TypeScript', 'TypeScript'),
+    ('Shell', 'Shell'),
+    ('C', 'C'),
+    ('Ruby', 'Ruby'),
+    ('Other', 'Other'),
+)
+
+FRAMEWORK_CHOICES = (
+    ('Ruby on Rails', 'Ruby on Rails'),
+    ('Symfony', 'Symfony'),
+    ('Angular JS', 'Angular JS'),
+    ('React.js', 'React.js'),
+    ('Cake PHP', 'Cake PHP'),
+    ('Asp.net', 'Asp.net'),
+    ('Node.js', 'Node.js'),
+    ('Yii Framework', 'Yii Framework'),
+    ('Meteor', 'Meteor'),
+    ('Laravel', 'Laravel'),
+    ('Ember', 'Ember'),
+    ('Django', 'Django'),
+    ('Express.js', 'Express.js'),
+    ('Spring', 'Spring'),
+    ('Flask', 'Flask'),
+    ('Active Server Pages', 'Active Server Pages'),
+    ('jQuery', 'jQuery'),
+    ('CodeIgniter', 'CodeIgniter'),
+    ('Drupal', 'Drupal'),
+    ('Bootstrap', 'Bootstrap'),
+)
+
 
 class User(AbstractUser):
     phone_number = models.CharField(max_length=15)
@@ -29,39 +95,14 @@ class User(AbstractUser):
 
 
 class JobSeekerProfile(models.Model):
-    LANGUAGE_CHOICES = (
-        ('English', 'English'),
-        ('Mandarin Chinese',
-         'Mandarin Chinese'),
-        ('Hindi', 'Hindi'),
-        ('Spanish', 'Spanish'),
-        ('French', 'French'),
-        ('Arabic', 'Arabic'),
-        ('Bengali', 'Bengali'),
-        ('Russian', 'Russian'),
-        ('Portuguese', 'Portuguese'),
-        ('Indonesian', 'Indonesian'),
-        ('Other', 'Other'),
-    )
-    CODING_LANGUAGE_CHOICES = (
-        ('JavaScript', 'JavaScript'),
-        ('Python', 'Python'),
-        ('Java', 'Java'),
-        ('PHP', 'PHP'),
-        ('C#', 'C#'),
-        ('C++', 'C++'),
-        ('TypeScript', 'TypeScript'),
-        ('Shell', 'Shell'),
-        ('C', 'C'),
-        ('Ruby', 'Ruby'),
-        ('Other', 'Other'),
-    )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=50)
     languages = MultiSelectField(
         choices=LANGUAGE_CHOICES, blank=True)
     coding_languages = MultiSelectField(
         choices=CODING_LANGUAGE_CHOICES, blank=True)
+    frameworks = MultiSelectField(
+        choices=FRAMEWORK_CHOICES, blank=True)
 
 
 class WorkExperience(models.Model):
