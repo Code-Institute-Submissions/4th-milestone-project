@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'jobs',
     'profiles',
     'plans',
+    'checkout',
     # Other
     'multiselectfield',
     'crispy_forms',
