@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, HttpResponseRedirect
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -18,6 +18,15 @@ def get_recruiter_profile(request):
     recruiter_profile = RecruiterProfile.objects.filter(user=request.user)
     if recruiter_profile.exists():
         return recruiter_profile.first()
+    return None
+
+
+def get_subscription(request):
+    subscription = PlanSubscription.objects.filter(
+        recruiter_profile=get_recruiter_profile(request))
+    if subscription.exists():
+        recruiter_subscription = subscription.first()
+        return recruiter_subscription
     return None
 
 
@@ -83,3 +92,26 @@ def confirmation(request, subscription_id):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def cancel(request):
+    subscription = get_subscription(request)
+    user = get_user(request)
+
+    stripe_subscription = stripe.Subscription.retrieve(
+        subscription.stripe_subscription_id)
+    stripe_subscription.delete()
+
+    subscription.active = False
+    subscription.save()
+
+    # When recruiter cancels subscription job seeker profile will be activated
+    user.is_job_seeker = True
+    user.save()
+
+    messages.success(
+        request, 'You cancelled your subscription. We actived the candidate profile\
+             in case you are making a career switch to become a developer!')
+
+    return redirect(reverse('candidate_profile'))

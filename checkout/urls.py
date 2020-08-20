@@ -6,5 +6,8 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
     path('confirmation/<subscription_id>',
          views.confirmation, name='confirmation'),
+    path('cancel/',
+         views.cancel, name='cancel'),
+
 
 ]
