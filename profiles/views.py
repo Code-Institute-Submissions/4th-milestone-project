@@ -18,7 +18,7 @@ def login_success(request):
 
 @ login_required
 def candidate_profile(request):
-    """ Display job seeker's profile. """
+    """ Display candidate's profile. """
 
     user = get_object_or_404(User, id=request.user.id)
 
@@ -32,6 +32,7 @@ def candidate_profile(request):
 
 @ login_required
 def edit_candidate_profile(request):
+    """ Edit candidate's profile. """
     job_seeker_profile = get_object_or_404(JobSeekerProfile, user=request.user)
 
     if request.method == 'POST':
@@ -69,6 +70,7 @@ def edit_candidate_profile(request):
 
 @ login_required
 def edit_work_experience(request):
+    """ Edit work experience candidate. """
 
     job_seeker = JobSeekerProfile.objects.filter(pk=request.user.id).first()
 
@@ -104,6 +106,7 @@ def edit_work_experience(request):
 
 @ login_required
 def delete_work_experience(request, experience_id):
+    """ Delete work experience candidate. """
     experience_item = get_object_or_404(WorkExperience, pk=experience_id)
     job_seeker = JobSeekerProfile.objects.filter(pk=request.user.id).first()
 
@@ -121,7 +124,7 @@ def delete_work_experience(request, experience_id):
 
 @ login_required
 def edit_education(request):
-
+    """ Edit education candidate. """
     job_seeker = JobSeekerProfile.objects.filter(pk=request.user.id).first()
 
     if request.method == 'POST':
@@ -156,6 +159,7 @@ def edit_education(request):
 
 @ login_required
 def delete_education(request, education_id):
+    """ Delete education candidate. """
     education_item = get_object_or_404(Education, pk=education_id)
     job_seeker = JobSeekerProfile.objects.filter(pk=request.user.id).first()
 
@@ -180,6 +184,44 @@ def recruiter_profile(request):
     template = 'profiles/recruiter_profile.html'
     context = {
         'user': user,
+    }
+
+    return render(request, template, context)
+
+
+@ login_required
+def edit_recruiter_profile(request):
+    """ Edit recruiter's profile. """
+    recruiter_profile = get_object_or_404(RecruiterProfile, user=request.user)
+
+    if request.method == 'POST':
+
+        user_form = UserForm(request.POST,
+                             request.FILES,
+                             instance=request.user)
+
+        profile_form = RecruiterProfileForm(
+            request.POST, instance=recruiter_profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            messages.success(request, 'Profile updated successfully')
+            return redirect(reverse('view_home'))
+        else:
+            messages.error(request,
+                           ('Update failed. Please ensure '
+                            'the form is valid.'))
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = RecruiterProfileForm(
+            instance=recruiter_profile)
+
+    template = 'profiles/edit_recruiter_profile.html'
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
     }
 
     return render(request, template, context)
