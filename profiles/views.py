@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, get_user
 from .models import User, JobSeekerProfile, RecruiterProfile, WorkExperience, Education
+from jobs.models import Jobs
 from .forms import UserForm, JobSeekerProfileForm, RecruiterProfileForm, WorkExperienceForm, EducationForm
 
 
@@ -189,11 +190,14 @@ def recruiter_profile(request):
 
     user = get_object_or_404(User, id=request.user.id)
     recruiter_profile = get_object_or_404(RecruiterProfile, user=request.user)
+    jobs_list = Jobs.objects.filter(
+        author=request.user).all().order_by('-date_added')[:5]
 
     template = 'profiles/recruiter_profile.html'
     context = {
         'user': user,
         'recruiter_profile': recruiter_profile,
+        'jobs_list': jobs_list,
     }
 
     return render(request, template, context)

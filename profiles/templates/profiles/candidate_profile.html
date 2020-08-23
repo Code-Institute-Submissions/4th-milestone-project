@@ -103,7 +103,7 @@
                         <h3>My skills</h3>
                         <p class="lead">Programming languages</p>
                         {% if candidate_profile.coding_languages %}
-                        <ul>
+                        <ul class="list-unstyled">
                             {% for coding_language in candidate_profile.coding_languages %}
                             <li>{{ coding_language }}</li>
                             {% endfor %}
@@ -115,7 +115,7 @@
                     <div>
                         <p class="lead">Frameworks</p>
                         {% if candidate_profile.frameworks %}
-                        <ul>
+                        <ul class="list-unstyled">
                             {% for framework in candidate_profile.frameworks %}
                             <li>{{ framework }}</li>
                             {% endfor %}
@@ -127,7 +127,7 @@
                     <div>
                         <p class="lead">Spoken languages</p>
                         {% if candidate_profile.languages %}
-                        <ul>
+                        <ul class="list-unstyled">
                             {% for language in candidate_profile.languages %}
                             <li>{{ language }}</li>
                             {% endfor %}
