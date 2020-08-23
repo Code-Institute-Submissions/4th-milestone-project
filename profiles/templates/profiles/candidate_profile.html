@@ -2,7 +2,149 @@
 {% load static %}
 
 {% block content %}
-    <h1>Welcome candidate {{ user.first_name }}</h1>
-        <a href="{% url 'payment' %}">Advertise jobs as recruiter</a> 
+<!-- Candidate profile start -->
+<div class="candidate-profile">
+    <div class="container">
+        <div class="row pt-5">
+            <div class="col-lg-8 col-md-12">
+                <div>
+                    <div class="profile-image">
+                        <img src="{{ user.profile_image.url }}" alt="{{ user.first_name }} {{ user.last_name }}">
+                    </div>
+                    <div class="candidate-header">
+                        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+                        <div>
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><i
+                                        class="fa fa-code mr-2"></i>{{ candidate_profile.preferred_job }}</li>
+                                <li class="list-inline-item"><i
+                                        class="fa fa-map-marker mr-2"></i>{{ candidate_profile.location }}</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <!-- About me start -->
+                <section class="mb-4">
+                    <div>
+                        <h3>About Me</h3>
+                        <p>{{ user.about_me }}</p>
+                        {% if user %}
+                        <a href="{% url 'edit_candidate_profile' %}" title="Edit profile">Edit profile</a>
+                        {% endif %}
+                    </div>
+                </section>
+
+                <!-- Work experience start-->
+                <section class="mb-4">
+                    <h3>Work Experience</h3>
+                    <div>
+                        {% for experience in experience_list %}
+                        <div class="row mb-2">
+                            <div class="col-1 candidate-icon">
+                                <i class="fa fa-code"></i>
+                            </div>
+                            <div class="col-11 work-experience">
+                                <h5>{{ experience.job_title }}</h5>
+                                <p>{{ experience.company }} | {{ experience.location }}</p>
+                                <p class="text-muted">{{ experience.start_date }} - {{ experience.end_date }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if user %}
+                    <a href="{% url 'edit_work_experience' %}" title="Edit work experience">Edit work experience</a>
+                    {% endif %}
+                </section>
+
+                <!-- Education start-->
+                <section class="mb-4">
+                    <h3>Education</h3>
+                    <div>
+                        {% for education in education_list %}
+                        <div class="row mb-2">
+                            <div class="col-1 candidate-icon">
+                                <i class="fa fa-graduation-cap"></i>
+                            </div>
+                            <div class="col-11 education">
+                                <h5>{{ education.study }}</h5>
+                                <p>{{ education.education_institute }} | {{ education.location }}</p>
+                                <p class="text-muted">{{ education.start_date }} - {{ education.end_date }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if user %}
+                    <a href="{% url 'edit_education' %}" title="Edit education">Edit education</a>
+                    {% endif %}
+                </section>
+
+            </div>
+
+            <!-- Sidebar start-->
+            <div class="col-lg-4 col-md-12">
+                <!-- Contact details start-->
+                {% if user.is_job_seeker == False %}
+                <div class="my-3">
+                    <button class="btn btn-outline-success btn-lg" onclick="viewContactDetails()">Contact
+                        details</button>
+                    <div id="contact-details" style="display:none">
+                        <ul>
+                            <li>{{ user.phone_number }}</li>
+                            <li>{{ user.email }}</li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+                <div>
+                    <div>
+                        <h3>My skills</h3>
+                        <p class="lead">Programming languages</p>
+                        {% if candidate_profile.coding_languages %}
+                        <ul>
+                            {% for coding_language in candidate_profile.coding_languages %}
+                            <li>{{ coding_language }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No coding languages specified</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="lead">Frameworks</p>
+                        {% if candidate_profile.frameworks %}
+                        <ul>
+                            {% for framework in candidate_profile.frameworks %}
+                            <li>{{ framework }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No coding Frameworks specified</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="lead">Spoken languages</p>
+                        {% if candidate_profile.languages %}
+                        <ul>
+                            {% for language in candidate_profile.languages %}
+                            <li>{{ language }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No coding languages specified</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if user %}
+                        <a href="{% url 'edit_candidate_profile' %}" title="Edit skills">Edit skills</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

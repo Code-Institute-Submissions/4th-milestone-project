@@ -21,10 +21,18 @@ def candidate_profile(request):
     """ Display candidate's profile. """
 
     user = get_object_or_404(User, id=request.user.id)
+    candidate_profile = get_object_or_404(JobSeekerProfile, user=request.user)
+    experience_list = WorkExperience.objects.filter(
+        experience_item=candidate_profile)
+    education_list = Education.objects.filter(
+        education_item=candidate_profile)
 
     template = 'profiles/candidate_profile.html'
     context = {
         'user': user,
+        'candidate_profile': candidate_profile,
+        'experience_list': experience_list,
+        'education_list': education_list,
     }
 
     return render(request, template, context)
@@ -49,7 +57,7 @@ def edit_candidate_profile(request):
             profile_form.save()
 
             messages.success(request, 'Profile updated successfully')
-            return redirect(reverse('view_home'))
+            return redirect(reverse('candidate_profile'))
         else:
             messages.error(request,
                            ('Update failed. Please ensure '

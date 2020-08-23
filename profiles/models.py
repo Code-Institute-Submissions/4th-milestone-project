@@ -96,6 +96,7 @@ class User(AbstractUser):
 
 class JobSeekerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    preferred_job = models.CharField(max_length=50, blank=True)
     location = models.CharField(max_length=50)
     languages = MultiSelectField(
         choices=LANGUAGE_CHOICES, blank=True)

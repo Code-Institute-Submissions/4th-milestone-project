@@ -20,8 +20,10 @@ class UserForm(forms.ModelForm):
 class JobSeekerProfileForm(forms.ModelForm):
     class Meta:
         model = JobSeekerProfile
-        fields = ('location', 'languages', 'coding_languages', 'frameworks')
+        fields = ('preferred_job', 'location', 'languages',
+                  'coding_languages', 'frameworks')
         labels = {
+            'preferred_job': 'Preferred job',
             'location': 'Location',
             'languages': 'Languages',
             'coding_languages': 'Coding languages',

@@ -5,7 +5,7 @@
     <h1>Welcome candidate {{ first_name }}</h1>
 
  <div class="container">
-        <img src="{{ user.profile_image.url }}">
+        <img src="{{ user.profile_image.url }}" alt="{{ user.first_name }} {{ user.last_name }}">
         <form action="{% url 'edit_candidate_profile' %}" method="POST" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             

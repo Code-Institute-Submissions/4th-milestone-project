@@ -1,1 +1,23 @@
+.profile-image {
+    width: 100px;
+    height: auto;
+    position: absolute;
+}
 
+.profile-image img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.candidate-header {
+    margin-left: 125px;
+}
+
+
+.candidate-icon i {
+    font-size: 1.5rem;
+}
+
+.work-experience p {
+    margin-bottom: 0.2rem;
+}
