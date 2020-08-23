@@ -82,8 +82,8 @@ FRAMEWORK_CHOICES = (
 class User(AbstractUser):
     phone_number = models.CharField(max_length=15)
     about_me = models.TextField(max_length=500)
-    profile_image = models.ImageField(default='default.png',
-                                      upload_to='profile-images/', blank=True, null=True)
+    profile_image = models.ImageField('', default='default.png',
+                                      upload_to='profile-images/')
     stripe_customer_id = models.CharField(max_length=50)
     # In case the object plan type is deleted, the user shouldn't be deleted
     plan_type = models.ForeignKey(

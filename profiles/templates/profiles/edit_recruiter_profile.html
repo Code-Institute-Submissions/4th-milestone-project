@@ -2,9 +2,12 @@
 {% load static %}
 
 {% block content %}
-    <h1>Welcome candidate {{ first_name }}</h1>
+
+
 
  <div class="container">
+        <h2 class="mt-2">Edit recruiter profile</h2>
+        <hr>
         <img src="{{ user.profile_image.url }}">
         <form action="{% url 'edit_recruiter_profile' %}" method="POST" enctype="multipart/form-data" novalidate>
             {% csrf_token %}

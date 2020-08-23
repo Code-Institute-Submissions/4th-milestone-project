@@ -8,7 +8,6 @@ class UserForm(forms.ModelForm):
         fields = ('profile_image', 'first_name', 'last_name',
                   'phone_number', 'email', 'about_me',)
         labels = {
-            'profile_image': 'Profile image',
             'first_name': 'First name',
             'last_name': 'Last name',
             'phone_number': 'Phone number',
