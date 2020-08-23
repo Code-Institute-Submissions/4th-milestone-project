@@ -1,86 +1,139 @@
 {% load static %}
-
 <!doctype html>
 <html lang="en">
-  <head>
-
-    {% block meta %}
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {% endblock %}
-
-    {% block extra_meta %}
-    {% endblock %}
-
-    {% block corecss %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% endblock %}
-
-    {% block extra_css %}
-    {% endblock %}
-
-    {% block corejs %}
+   <head>
+      {% block meta %}
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      {% endblock %}
+      {% block extra_meta %}
+      {% endblock %}
+      {% block corecss %}
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+      <link rel="stylesheet" href="{% static 'css/base.css' %}">
+      {% endblock %}
+      {% block extra_css %}
+      {% endblock %}
+      {% block corejs %}
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <script src="{% static 'js/main.js' %}"></script>
-    {% endblock %}
-
-    {% block extra_js %}
-    {% endblock %}
-
-    {% if title %}
-        <title>codejob.ie - {{ title }}</title>
-    {% else %}
-        <title>codejob.ie</title>
-    {% endif %}
-  </head>
-  <body>
-    <header class="container-fluid">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="{% url 'view_home' %}">Navbar</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                {% if user.is_authenticated %}
-                <a class="nav-item nav-link" href="{% url 'add_job' %}">Add job</a>
-                <a class="nav-item nav-link" href="{% url 'profile' %}">My profile</a>
-                <a class="nav-item nav-link" href="{% url 'account_logout' %}">Logout</a>
-                {% else %}
-                <a class="nav-item nav-link" href="{% url 'account_login' %}">Login</a>
-                <a class="nav-item nav-link" href="{% url 'account_signup' %}">Register</a>
-                {% endif %}
+      {% endblock %}
+      {% block extra_js %}
+      {% endblock %}
+      {% if title %}
+      <title>codejob.ie - {{ title }}</title>
+      {% else %}
+      <title>codejob.ie</title>
+      {% endif %}
+   </head>
+   <body>
+      <header class="container-fluid">
+         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'view_home' %}">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+               <div class="navbar-nav">
+                  {% if user.is_authenticated %}
+                  <a class="nav-item nav-link" href="{% url 'add_job' %}">Add job</a>
+                  <a class="nav-item nav-link" href="{% url 'profile' %}">My profile</a>
+                  <a class="nav-item nav-link" href="{% url 'account_logout' %}">Logout</a>
+                  {% else %}
+                  <a class="nav-item nav-link" href="{% url 'account_login' %}">Login</a>
+                  <a class="nav-item nav-link" href="{% url 'account_signup' %}">Register</a>
+                  {% endif %}
+               </div>
             </div>
-          </div>
-      </nav>
-    </header>
-
-    
-    {% block page_header %}
-    {% endblock %}
-
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
-
-
-    {% block content %}
-    {% endblock %}
-
-    {% block postloadjs %}
-
-    {% endblock %}
-
-    
-  </body>
+         </nav>
+      </header>
+      {% block page_header %}
+      {% endblock %}
+      {% if messages %}
+      <ul class="messages">
+         {% for message in messages %}
+         <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+         {% endfor %}
+      </ul>
+      {% endif %}
+      {% block content %}
+      {% endblock %}
+      <!-- Footer start -->
+    <footer>
+      <section class="section-footer container">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div>
+                    <div>
+                        <h5>About Us</h5>
+                        <p>Here comes about us</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div>
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <i class="fa fa-map-marker mr-2"></i>Blackrock Business Park, 1 Block 1, Carysfort Ave, Blackrock, Co. Dublin, Ireland
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope mr-2"></i><a href="mailto:info@codejob.ie">info@codejob.ie</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-phone mr-2"></i><a href="tel:+353 1 539 7973">+353 1 539 7973</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div>
+                    <h5>Popular Links</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#">All jobs</a>
+                        </li>
+                        <li>
+                            <a href="#">All candidates</a>
+                        </li>   
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div>
+                    <h5>Popular coding bootcamps</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="https://codeinstitute.net/">Code Institute</a>
+                        </li>
+                        <li>
+                            <a href="https://www.lewagon.com/">le wagon</a>
+                        </li>   
+                        <li>
+                            <a href="https://www.appacademy.io/">App Academy</a>
+                        </li>   
+                    </ul>
+                </div>
+            </div>
+        </div>
+      </section>
+      <section class="section-copyright">
+         <div class="container-fluid">
+            <div class="row bg-dark">
+               <div class="col-12 text-center text-white py-3">
+                  Made with <i class="fa fa-heart text-danger"></i> by
+                  <a href="{% url 'view_home' %}" style="color:white">codejob.ie</a> <br />
+                  <small>&copy; 2020, all Rights Reserved.</small>
+               </div>
+            </div>
+         </div>
+      </section>
+      </footer
+      {% block postloadjs %}
+      {% endblock %}
+   </body>
 </html>
