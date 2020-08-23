@@ -13,7 +13,7 @@ class UserForm(forms.ModelForm):
             'last_name': 'Last name',
             'phone_number': 'Phone number',
             'email': 'E-mail',
-            'about_me': 'About me',
+            'about_me': 'About',
         }
 
 

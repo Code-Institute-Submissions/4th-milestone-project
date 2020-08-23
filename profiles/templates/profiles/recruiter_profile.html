@@ -2,7 +2,87 @@
 {% load static %}
 
 {% block content %}
-    <h1>Welcome recruiter {{ user.first_name }}</h1>
+<!-- Recruiter profile start -->
+<div class="recruiter-profile">
+    <div class="container">
+        <div class="row pt-5">
+            <div class="col-lg-8 col-md-12">
+                <div>
+                    <div class="profile-image">
+                        <img src="{{ user.profile_image.url }}" alt="{{ user.first_name }} {{ user.last_name }}">
+                    </div>
+                    <div class="candidate-header">
+                        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+                        <div>
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><i
+                                        class="fa fa-globe mr-2"></i>{{ recruiter_profile.position }}</li>
+                                <li class="list-inline-item"><i
+                                        class="fa fa-map-marker mr-2"></i>{{ recruiter_profile.location }}</li>
 
- 
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <!-- About us start -->
+                <section class="mb-4">
+                    <div>
+                        <h3>About Us</h3>
+                        <p>{{ user.about_me }}</p>
+                    </div>
+                </section>
+
+                <!-- Jobs start-->
+                <section class="mb-4">
+                    <h3>Our jobs</h3>
+                    <div>
+                        {% for experience in experience_list %}
+                        <div class="row mb-2">
+                            <div class="col-1 candidate-icon">
+                                <i class="fa fa-code"></i>
+                            </div>
+                            <div class="col-11 work-experience">
+                                <h5>{{ experience.job_title }}</h5>
+                                <p>{{ experience.company }} | {{ experience.location }}</p>
+                                <p class="text-muted">{{ experience.start_date }} - {{ experience.end_date }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if user %}
+                    <a href="{% url 'edit_work_experience' %}" title="Edit work experience">Edit work experience</a>
+                    {% endif %}
+                </section>
+
+            </div>
+
+            <!-- Sidebar start-->
+            <div class="col-lg-4 col-md-12">
+                <!-- Contact details start-->
+                <div class="my-3">
+                    <button class="btn btn-outline-success btn-lg">Edit profile</button>
+                    <div id="contact-details">
+                        <h3>Contact details</h3>
+                        <ul class="list-unstyled">
+                            <li>{{ recruiter_profile.company_name }}</li>
+                            <li>{{ recruiter_profile.company_address1 }}</li>
+                            {% if recruiter_profile.company_address2 %}
+                            <li>{{ recruiter_profile.company_address2 }}</li>
+                            {% endif %}
+                            <li>{{ recruiter_profile.company_ZIP }}</li>
+                            <li>{{ recruiter_profile.company_city }}</li>
+                            <li>{{ recruiter_profile.company_state }}</li>
+                            <li>{{ recruiter_profile.company_country }}</li>
+                            <li>{{ user.phone_number }}</li>
+                            <li>{{ user.email }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

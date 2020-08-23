@@ -188,10 +188,12 @@ def recruiter_profile(request):
     """ Display recruiter's profile. """
 
     user = get_object_or_404(User, id=request.user.id)
+    recruiter_profile = get_object_or_404(RecruiterProfile, user=request.user)
 
     template = 'profiles/recruiter_profile.html'
     context = {
         'user': user,
+        'recruiter_profile': recruiter_profile,
     }
 
     return render(request, template, context)
