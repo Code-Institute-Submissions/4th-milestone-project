@@ -1,3 +1,21 @@
+/* Testimonial homepage */
+.testimonial-img-wrapper {
+    width: 200px;
+    height: 200px;
+}
+
+.carousel-indicators {
+    bottom: -30px;
+}
+
+.carousel-inner {
+    margin-bottom: 30px;
+
+}
+
+
+
+/* Profile page */
 .profile-image {
     width: 100px;
     height: auto;
