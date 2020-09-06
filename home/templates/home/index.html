@@ -42,6 +42,24 @@
   </div>
 </section>
 
+<!-- Recent jobs start-->
+<section class="section-recent-jobs">
+    <h2 class="text-center text-uppercase my-4">Recent jobs</h2>
+    <div>
+        {% for job in recent_job_list %}
+        <div class="row mx-3 mb-3 py-3 bg-light">
+            <div class="col-1 candidate-icon">
+                <i class="fa fa-code"></i>
+            </div>
+            <div class="col-10 job">
+                <h5>{{ job.title }}</h5>
+                <p><i class="fa fa-calendar mr-2"></i>Added: {{ job.date_added }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
 <!-- Testimonials start -->
 <section class="section-testimonials bg-success">
   <div class="row">
