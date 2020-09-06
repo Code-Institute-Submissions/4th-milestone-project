@@ -1,6 +1,10 @@
 # 4th-milestone-project
 
-default image ==> https://pixabay.com/nl/vectors/man-business-cartoon-zakenman-1352025/
+default image ==> https://pixabay.com/nl/vectors/man-business-cartoon-zakenman-1352025/ / UN ROverhate / https://pixabay.com/nl/users/roverhate-1759589/
+testimonial image 1 ==> https://pixabay.com/nl/photos/baard-gezicht-man-model-snor-1845166/ / UN Pexels / https://pixabay.com/nl/users/pexels-2286921/
+testimonial image 2 ==> https://pixabay.com/nl/photos/meisje-lachend-vrouwelijke-vrouw-872149/ / UN Free-Photos / https://pixabay.com/nl/users/free-photos-242387/
+
+
 Abstract user ==> https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 Django Decouple ==> https://simpleisbetterthancomplex.com/2015/11/26/package-of-the-week-python-decouple.html
 
