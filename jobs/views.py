@@ -7,10 +7,15 @@ from .models import Jobs
 
 
 def all_jobs(request):
-    """ A view to return the job page """
-    template = 'jobs/job.html'
+    """ A view to return the page with all jobs """
+    all_jobs = Jobs.objects.order_by('-date_added').all()
 
-    return render(request, template)
+    template = 'jobs/all_jobs.html'
+    context = {
+        'all_jobs': all_jobs
+    }
+
+    return render(request, template, context)
 
 
 @login_required

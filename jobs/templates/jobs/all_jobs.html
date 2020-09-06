@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- All jobs and search profile start -->
+<div class="all-jobs">
+    <div class="container">
+        <div class="row pt-5">
+            <!-- Searchbar start-->
+            <div class="col-lg-4 col-md-12">
+
+            </div>
+            <!-- All jobs start-->
+            <div class="col-lg-8 col-md-12">
+                <section class="section-all-jobs">
+                    <div>
+                        {% for job in all_jobs %}
+                        <div class="row mx-3 mb-3 py-3 bg-light">
+                            <div class="col-1 candidate-icon">
+                                <i class="fa fa-code"></i>
+                            </div>
+                            <div class="col-10 job">
+                                <h5>{{ job.title }}</h5>
+                                <p><i class="fa fa-calendar mr-2"></i>Added: {{ job.date_added }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+           </div>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
