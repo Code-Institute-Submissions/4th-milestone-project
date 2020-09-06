@@ -1,3 +1,29 @@
+html,
+body {
+    font-size: 1em;
+    font-family: "Source Sans Pro", sans-serif;
+    line-height: 1.4;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Banner homepage */
+.homepage-banner {
+    /*Credits: Pixabay user Peggy_Marco 
+      https://pixabay.com/nl/users/peggy_marco-1553824/
+      https://pixabay.com/nl/photos/man-laptop-het-werk-digitale-nomade-4749237/ */
+    background-image: url(../../media/man-4749237_1920.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 70vh;
+    margin-bottom: 0;
+}
+
+.banner-title {
+    margin-top: 20%;
+}
+
 /* Testimonial homepage */
 .testimonial-img-wrapper {
     width: 200px;
