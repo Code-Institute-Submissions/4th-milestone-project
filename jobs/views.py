@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -10,9 +11,19 @@ def all_jobs(request):
     """ A view to return the page with all jobs """
     all_jobs = Jobs.objects.order_by('-date_added').all()
 
+    paginator = Paginator(all_jobs, 5)
+    page = request.GET.get('page', 1)
+
+    try:
+        paged_all_jobs = paginator.page(page)
+    except PageNotAnInteger:
+        paged_all_jobs = paginator.page(1)
+    except EmptyPage:
+        paged_all_jobs = page(paginator.num_pages)
+
     template = 'jobs/all_jobs.html'
     context = {
-        'all_jobs': all_jobs
+        'all_jobs': paged_all_jobs
     }
 
     return render(request, template, context)

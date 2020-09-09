@@ -16,6 +16,7 @@
             <div class="col-lg-8 col-md-12">
                 <section class="section-all-jobs">
                     <div>
+                    {% if all_jobs %}
                         {% for job in all_jobs %}
                         <div class="row mx-3 mb-3 py-3 bg-light">
                             <div class="col-1 candidate-icon">
@@ -27,11 +28,49 @@
                             </div>
                         </div>
                         {% endfor %}
+                    {% else %}
+                        <div>
+                            <p>No jobs available</p>
+                        </div>
+                    {% endif %}
                     </div>
+                    <div class="d-flex justify-content-center">
+                        {% if all_jobs.has_other_pages %}
+                            <ul class="pagination">
+                                {% if all_jobs.has_previous %}
+                                    <li class="page-item">
+                                        <a href="?page={{all_jobs.previous_page_number}}" class="page-link">&laquo;</a>
+                                    </li>
+                                {% else %}
+                                    <li class="pageitem disabled">
+                                        <a href="" class="page-link">&laquo;</a>
+                                    </li>
+                                {% endif %}
+                                {% for i in all_jobs.paginator.page_range %}
+                                    {% if all_jobs.number == i %}
+                                        <li class="page-item active">
+                                            <a class="page-link">{{i}}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                        <a href="?page={{i}}" class="page-link">{{i}}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if all_jobs.has_next %}
+                                    <li class="page-item">
+                                        <a href="?page={{all_jobs.next_page_number}}" class="page-link">&raquo;</a>
+                                    </li>
+                                {% else %}
+                                    <li class="pageitem disabled">
+                                        <a href="" class="page-link">&raquo;</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}   
+                    </div>   
                 </section>
            </div>
-
-
         </div>
     </div>
 </div>
