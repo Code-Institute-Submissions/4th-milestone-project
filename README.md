@@ -8,6 +8,7 @@ homepage banner ==> https://pixabay.com/nl/photos/man-laptop-het-werk-digitale-n
 
 Abstract user ==> https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 Django Decouple ==> https://simpleisbetterthancomplex.com/2015/11/26/package-of-the-week-python-decouple.html
+Pagination ==> https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html
 
 Most spoken languages ==> https://www.babbel.com/en/magazine/the-10-most-spoken-languages-in-the-world
 Most popular coding languages ==> https://www.businessinsider.nl/most-popular-programming-languages-github-2019-11

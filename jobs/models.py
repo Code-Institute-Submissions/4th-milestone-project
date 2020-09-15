@@ -1,6 +1,8 @@
 from django.db import models
-from profiles.models import User
+from profiles.models import User, LANGUAGE_CHOICES, CODING_LANGUAGE_CHOICES, FRAMEWORK_CHOICES
 from django.conf import settings
+from multiselectfield import MultiSelectField
+import datetime
 
 
 class Jobs(models.Model):
@@ -18,6 +20,12 @@ class Jobs(models.Model):
     # Date is created when job is modified and can't be modified
     last_modified = models.DateTimeField(
         auto_now=True, editable=False, blank=True)
+    languages = MultiSelectField(
+        choices=LANGUAGE_CHOICES, blank=True)
+    coding_languages = MultiSelectField(
+        choices=CODING_LANGUAGE_CHOICES, blank=True)
+    frameworks = MultiSelectField(
+        choices=FRAMEWORK_CHOICES, blank=True)
 
     def __str__(self):
         return self.title

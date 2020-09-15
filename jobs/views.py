@@ -3,27 +3,63 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import JobsForm
+from .forms import JobsForm, SearchForm
 from .models import Jobs
+from django.db.models import Q
 
 
 def all_jobs(request):
     """ A view to return the page with all jobs """
-    all_jobs = Jobs.objects.order_by('-date_added').all()
+    job_list = Jobs.objects.order_by('-date_added').all()
 
-    paginator = Paginator(all_jobs, 5)
+    paginator = Paginator(job_list, 5)
     page = request.GET.get('page', 1)
 
+    search_form = SearchForm()
+
     try:
-        paged_all_jobs = paginator.page(page)
+        job_list = paginator.page(page)
     except PageNotAnInteger:
-        paged_all_jobs = paginator.page(1)
+        job_list = paginator.page(1)
     except EmptyPage:
-        paged_all_jobs = page(paginator.num_pages)
+        job_list = page(paginator.num_pages)
 
     template = 'jobs/all_jobs.html'
     context = {
-        'all_jobs': paged_all_jobs
+        'search_form': search_form,
+        'job_list': job_list,
+
+    }
+
+    return render(request, template, context)
+
+
+def search(request):
+
+    if request.method == 'GET':
+        search_form = SearchForm()
+        search = request.GET.get('description')
+        if search == '' or search == None:
+            job_list = None
+        else:
+            job_list = Jobs.objects.order_by(
+                '-date_added').filter(description__icontains=search)
+
+            paginator = Paginator(job_list, 5)
+            page = request.GET.get('page', 1)
+
+            try:
+                job_list = paginator.page(page)
+            except PageNotAnInteger:
+                job_list = paginator.page(1)
+            except EmptyPage:
+                job_list = page(paginator.num_pages)
+
+    template = 'jobs/results.html'
+    context = {
+        'search_form': search_form,
+        'job_list': job_list,
+
     }
 
     return render(request, template, context)

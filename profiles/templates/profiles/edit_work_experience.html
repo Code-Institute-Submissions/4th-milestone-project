@@ -6,7 +6,7 @@
 
  <div class="container">
     
-        <form class="form-inline justify-content-between mb-3 action="{% url 'edit_work_experience' %}" method="POST" novalidate>
+        <form class="form-inline justify-content-between mb-3" action="{% url 'edit_work_experience' %}" method="POST" novalidate>
             {% csrf_token %}
 
              {{ form|crispy }} 
