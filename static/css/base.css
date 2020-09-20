@@ -12,6 +12,30 @@ body {
     overflow-x: hidden;
 }
 
+/* Messages */
+li.success {
+    background-color: #28a745;
+    color: #f8f9fa;
+    padding: 8px;
+
+}
+
+li.error {
+    background-color: #dc3545;
+    color: #f8f9fa;
+    padding: 8px;
+
+}
+
+li.info {
+    background-color: #17a2b8;
+    color: #f8f9fa;
+    padding: 8px;
+
+}
+
+
+
 /* Banner homepage */
 .homepage-banner {
     /*Credits: Pixabay user Peggy_Marco 

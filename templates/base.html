@@ -54,13 +54,15 @@
       </header>
       {% block page_header %}
       {% endblock %}
+      <div class="message-container mx-auto py-3">
       {% if messages %}
-      <ul class="messages">
+      <ul class="messages" style="list-style-type:none;">
          {% for message in messages %}
          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
          {% endfor %}
       </ul>
       {% endif %}
+      </div>
       {% block content %}
       {% endblock %}
       <!-- Footer start -->

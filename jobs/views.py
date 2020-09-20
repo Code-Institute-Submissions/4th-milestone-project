@@ -75,8 +75,9 @@ def add_job(request):
         if form.is_valid():
             form.instance.author = request.user
             form.save()
-            messages.success(request, 'You have successfully added a new job!')
-            return redirect(reverse('all_jobs'))
+            messages.success(
+                request, 'You have successfully added a new job! Would you like to add another job?')
+            return redirect(reverse('add_job'))
         else:
             messages.error(request,
                            ('Could not add the new job. '
