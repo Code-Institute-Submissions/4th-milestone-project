@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, get_user
@@ -191,7 +192,17 @@ def recruiter_profile(request):
     user = get_object_or_404(User, id=request.user.id)
     recruiter_profile = get_object_or_404(RecruiterProfile, user=request.user)
     jobs_list = Jobs.objects.filter(
-        author=request.user).all().order_by('-date_added')[:5]
+        author=request.user).all().order_by('-date_added')
+
+    paginator = Paginator(jobs_list, 5)
+    page = request.GET.get('page', 1)
+
+    try:
+        jobs_list = paginator.page(page)
+    except PageNotAnInteger:
+        jobs_list = paginator.page(1)
+    except EmptyPage:
+        jobs_list = page(paginator.num_pages)
 
     template = 'profiles/recruiter_profile.html'
     context = {
@@ -222,7 +233,7 @@ def edit_recruiter_profile(request):
             profile_form.save()
 
             messages.success(request, 'Profile updated successfully')
-            return redirect(reverse('view_home'))
+            return redirect(reverse('recruiter_profile'))
         else:
             messages.error(request,
                            ('Update failed. Please ensure '
