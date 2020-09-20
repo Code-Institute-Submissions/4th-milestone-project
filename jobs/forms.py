@@ -9,10 +9,5 @@ class JobsForm(forms.ModelForm):
                   'coding_languages', 'frameworks')
 
 
-class SearchForm(forms.ModelForm):
-    class Meta:
-        model = Jobs
-        fields = ('description',)
-        labels = {
-            'description': 'Search',
-        }
+class SearchForm(forms.Form):
+    description = forms.CharField()
