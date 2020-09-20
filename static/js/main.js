@@ -6,3 +6,8 @@ function viewContactDetails() {
         x.style.display = "block";
     }
 }
+
+// publisch (multiple) checkboxes inline
+$(document).ready(function () {
+    $(".form-check").addClass("form-check-inline");
+});
