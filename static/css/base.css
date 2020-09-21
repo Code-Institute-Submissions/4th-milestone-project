@@ -35,13 +35,12 @@ li.info {
 }
 
 
-
 /* Banner homepage */
 .homepage-banner {
     /*Credits: Pixabay user Peggy_Marco 
       https://pixabay.com/nl/users/peggy_marco-1553824/
       https://pixabay.com/nl/photos/man-laptop-het-werk-digitale-nomade-4749237/ */
-    background-image: url(../../media/man-4749237_1920.jpg);
+    background-image: url('../../media/man-4749237_1920.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -50,7 +49,7 @@ li.info {
 }
 
 .banner-title {
-    margin-top: 20%;
+    margin-top: 15%;
 }
 
 /* Testimonial homepage */
