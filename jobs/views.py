@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import JobsForm, SearchForm
 from .models import Jobs
+from profiles.models import RecruiterProfile
 from django.db.models import Q
 
 
@@ -99,11 +100,15 @@ def job_profile(request, job_id):
     """ A view to show job profile """
 
     job = get_object_or_404(Jobs, pk=job_id)
+    recruiter = RecruiterProfile.objects.filter(user=job.author).first()
+    #user1 = User.objects.filter(username=recruiter.user)
 
     template = 'jobs/job_profile.html'
     context = {
         'title': 'Job profile',
         'job': job,
+        'recruiter': recruiter,
+        # 'user1': user1,
     }
 
     return render(request, template, context)

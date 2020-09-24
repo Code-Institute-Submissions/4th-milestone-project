@@ -1,9 +1,109 @@
-
 {% extends "base.html" %}
 {% load static %}
 
 {% block content %}
-    {{ title }}
-    {{ description }}
+<!-- Job profile start -->
+<div class="candidate-profile">
+    <div class="container">
+        <div class="row pt-5">
+            <div class="col-lg-8 col-md-12">
+                <div>
+                    <div class="profile-image">
+                        <img src="{{ job.author.profile_image.url }}" alt="{{ job.author.first_name }} {{ job.author.last_name }}">
+                    </div>
+                    <div class="candidate-header">
+                        <h2>{{ job.title }}</h2>
+                        <div>
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><i
+                                        class="fa fa-building mr-2"></i>{{ recruiter.company_name }}</li>
+                                <li class="list-inline-item"><i
+                                        class="fa fa-map-marker mr-2"></i>{{ recruiter.company_city }} in {{ recruiter.company_country }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <!-- Job description start -->
+                <section class="mb-4">
+                    <div>
+                        <h3>Job description</h3>
+                        <p>{{ job.description }}</p>
+
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Sidebar start-->
+            <div class="col-lg-4 col-md-12">
+
+                <!-- Contact details recruiter start-->
+                <div class="my-3">
+                    <div id="contact-details">
+                        <h3>Contact</h3>
+                            <ul class="list-unstyled">
+                                <li><strong>{{ job.author.first_name }} {{ job.author.last_name }}</strong></li>
+                                <li>{{ recruiter.position }}</li>
+                                <li>{{ job.author.phone_number }}</li>
+                                <li>{{ recruiter.company_name }}</li>
+                                <li>{{ recruiter.company_address1 }}</li>
+                                {% if recruiter.company_address2 %}
+                                <li>{{ recruiter.company_address2 }}</li>
+                                {% endif %}
+                                <li>{{ recruiter.company_ZIP }} {{ recruiter.company_city }}</li>
+                                <li>{{ recruiter.company_state }}</li>
+                                <li>{{ recruiter.company_country }}</li>
+
+
+                            </ul>
+                    </div>
+                </div>
+
+                <!-- Required skills start-->
+                <div>
+                    <div>
+                        <h3>Required skills</h3>
+                        <p class="lead">Programming languages</p>
+                        {% if job.coding_languages %}
+                        <ul class="list-unstyled">
+                            {% for coding_language in job.coding_languages %}
+                            <li>{{ coding_language }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No coding languages specified</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="lead">Frameworks</p>
+                        {% if job.frameworks %}
+                        <ul class="list-unstyled">
+                            {% for framework in job.frameworks %}
+                            <li>{{ framework }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No coding Frameworks specified</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="lead">Spoken languages</p>
+                        {% if job.languages %}
+                        <ul class="list-unstyled">
+                            {% for language in job.languages %}
+                            <li>{{ language }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No coding languages specified</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
