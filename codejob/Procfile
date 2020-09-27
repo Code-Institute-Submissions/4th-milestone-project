@@ -1,1 +1,2 @@
 web: gunicorn codejob.wsgi
+python manage.py collectstatic --noinput
