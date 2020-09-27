@@ -101,14 +101,12 @@ def job_profile(request, job_id):
 
     job = get_object_or_404(Jobs, pk=job_id)
     recruiter = RecruiterProfile.objects.filter(user=job.author).first()
-    #user1 = User.objects.filter(username=recruiter.user)
 
     template = 'jobs/job_profile.html'
     context = {
         'title': 'Job profile',
         'job': job,
         'recruiter': recruiter,
-        # 'user1': user1,
     }
 
     return render(request, template, context)
