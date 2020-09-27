@@ -161,10 +161,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATICFILES_LOCATION = 'static'
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+# STATICFILES_LOCATION = 'static'
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
@@ -172,6 +172,16 @@ AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = 'eu-central-1'
 AWS_S3_CUSTOM_DOMAIN = "%s.s3.amazonaws.com" % AWS_STORAGE_BUCKET_NAME
 AWS_DEFAULT_ACL = 'public-read'
+
+DEFAULT_FILE_STORAGE = AWS_STORAGE_BUCKET_NAME + \
+    '.aws.utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = AWS_STORAGE_BUCKET_NAME + \
+    '.aws.utils.StaticRootS3BotoStorage'
+S3_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_ROOT = MEDIA_URL
+STATIC_URL = S3_URL + 'static/'
+
 
 MEDIAFILES_LOCATION = 'media'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
