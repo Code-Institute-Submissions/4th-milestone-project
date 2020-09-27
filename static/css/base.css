@@ -92,6 +92,13 @@ li.info {
     margin-bottom: 0.2rem;
 }
 
+/* Edit profile */
+
+.edit-profile img {
+    width: 100%;
+    height: auto;
+}
+
 /* Footer */
 
 footer {

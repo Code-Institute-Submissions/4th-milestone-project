@@ -3,7 +3,7 @@
 
 {% block content %}
 
- <div class="container">
+ <div class="container edit-profile">
         <h2 class="mt-2">Edit candidate profile</h2>
         <hr>
         <img src="{{ user.profile_image.url }}" alt="{{ user.first_name }} {{ user.last_name }}">
@@ -14,7 +14,7 @@
 
             {{ profile_form|crispy }}
             
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary mb-3">Submit</button>
         </form>
     </div>  
 {% endblock %}

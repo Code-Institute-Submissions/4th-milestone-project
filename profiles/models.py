@@ -174,9 +174,9 @@ def save_user_profile(sender, instance, **kwargs):
     else:
         instance.recruiterprofile.save()
 
-    img = Image.open(instance.profile_image)
+    # img = Image.open(instance.profile_image)
 
-    if img.width > 300 or img.height > 300:
-        img_dimensions = (300, 300)
-        img.thumbnail(img_dimensions)
-        img.save(instance.profile_image.path)
+    # if img.width > 300 or img.height > 300:
+    #     img_dimensions = (300, 300)
+    #     img.thumbnail(img_dimensions)
+    #     img.save(instance.profile_image.path)
