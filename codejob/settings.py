@@ -187,3 +187,5 @@ AUTH_USER_MODEL = 'profiles.User'
 
 STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+
+django_heroku.settings(locals())
