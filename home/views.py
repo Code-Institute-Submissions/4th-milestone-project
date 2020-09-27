@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from profiles.models import User
+from profiles.models import User, RecruiterProfile
 from jobs.models import Jobs
 
 
