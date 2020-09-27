@@ -40,7 +40,7 @@ li.info {
     /*Credits: Pixabay user Peggy_Marco 
       https://pixabay.com/nl/users/peggy_marco-1553824/
       https://pixabay.com/nl/photos/man-laptop-het-werk-digitale-nomade-4749237/ */
-    background-image: url('../../media/man-4749237_1920.jpg');
+    background-image: url('https://django-codejob-ie.s3.eu-central-1.amazonaws.com/man-4749237_1920.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
