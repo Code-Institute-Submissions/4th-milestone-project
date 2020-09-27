@@ -36,8 +36,13 @@
                                 <i class="fa fa-code"></i>
                             </div>
                             <div class="col-10 job">
-                                <h5>{{ job.title }}</h5>
-                                <p><i class="fa fa-calendar mr-2"></i>Added: {{ job.date_added }}</p>
+                                <a href="{% url 'job_profile' job.id %}"><h5>{{ job.title }}</h5></a>
+                                <div>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="fa fa-building mr-2"></i>{{ job.author.recruiterprofile.company_name }}</li>
+                                        <li class="list-inline-item"><i class="fa fa-calendar mr-2"></i>Added: {{ job.date_added }}</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         {% endfor %}
