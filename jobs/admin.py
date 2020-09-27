@@ -5,7 +5,6 @@ from .models import Jobs
 class JobsAdmin(admin.ModelAdmin):
     list_display = (
         'title',
-        'description',
         'author',
         'date_added',
         'last_modified',

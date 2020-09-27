@@ -7,6 +7,9 @@ PLAN_CHOICES = (
 
 
 class Plans(models.Model):
+    class Meta:
+        verbose_name_plural = 'Plans'
+
     plan_type = models.CharField(
         choices=PLAN_CHOICES,
         default='Jobseeker plan',

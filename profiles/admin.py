@@ -1,9 +1,8 @@
 from django.contrib import admin
-from .models import User, JobSeekerProfile, RecruiterProfile, WorkExperience
+from .models import User, JobSeekerProfile, RecruiterProfile
 
 
 class UserAdmin(admin.ModelAdmin):
-    '''' Show user profile's fields in Admin'''
     list_display = (
         'username',
         'first_name',
@@ -11,7 +10,24 @@ class UserAdmin(admin.ModelAdmin):
     )
 
 
+class JobSeekerProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'preferred_job',
+        'location',
+    )
+
+
+class RecruiterProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'position',
+        'company_name',
+        'company_city',
+        'company_country',
+    )
+
+
 admin.site.register(User, UserAdmin)
-admin.site.register(JobSeekerProfile)
-admin.site.register(RecruiterProfile)
-admin.site.register(WorkExperience)
+admin.site.register(JobSeekerProfile, JobSeekerProfileAdmin)
+admin.site.register(RecruiterProfile, RecruiterProfileAdmin)
