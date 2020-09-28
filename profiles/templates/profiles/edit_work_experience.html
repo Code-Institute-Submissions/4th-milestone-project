@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block content %}
-    <h1>Welcome candidate {{ first_name }}</h1>
-
+{% block content %}  
  <div class="container">
-    
-        <form class="form-inline justify-content-between mb-3" action="{% url 'edit_work_experience' %}" method="POST" novalidate>
+    <h1>Edit work experience</h1>
+    <hr>
+        <form class="mb-3" action="{% url 'edit_work_experience' %}" method="POST" novalidate>
             {% csrf_token %}
 
              {{ form|crispy }} 
@@ -31,7 +30,7 @@
             </div>
 
             {% endfor %}
-        </ul 
+        </ul> 
 
     </div>  
 {% endblock %}

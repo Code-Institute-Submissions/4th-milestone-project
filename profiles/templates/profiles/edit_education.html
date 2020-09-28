@@ -2,15 +2,13 @@
 {% load static %}
 
 {% block content %}
-    <h1>Welcome candidate {{ first_name }}</h1>
 
- <div class="container">
-    
-        <form class="form-inline justify-content-between mb-3 action="{% url 'edit_education' %}" method="POST" novalidate>
+<div class="container">
+    <h1>Edit education</h1>  
+    <hr>  
+        <form class="mb-3" action="{% url 'edit_education' %}" method="POST" novalidate>
             {% csrf_token %}
-
-             {{ form|crispy }} 
-        
+             {{ form|crispy }}       
             
             <button id="add-button" type="submit" class="btn btn-primary">Add</button>
         </form>
@@ -31,7 +29,7 @@
             </div>
 
             {% endfor %}
-        </ul 
+        </ul> 
 
     </div>  
 {% endblock %}
