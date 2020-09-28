@@ -69,6 +69,11 @@ def search(request):
 @login_required
 def add_job(request):
     """ A view to add a new job """
+    if request.user.is_job_seeker:
+        job_seeker = True
+    else:
+        job_seeker = False
+
     form = JobsForm(request.GET)
 
     if request.method == 'POST':
@@ -91,6 +96,7 @@ def add_job(request):
     context = {
         'title': 'Add new job',
         'form': form,
+        'job_seeker': job_seeker,
     }
 
     return render(request, template, context)
