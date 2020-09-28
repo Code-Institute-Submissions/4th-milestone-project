@@ -18,11 +18,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
 
-                    {{ item.study}}
-                    {{ item.location}}
-                    {{ item.education_institute}}
-                    {{ item.start_date}}
-                    {{ item.end_date}}
+                    {{ item.study}} at {{ item.education_institute}} in {{ item.location}}, {{ item.start_date}} - {{ item.end_date}}
                     <a href="{% url 'delete_education' item.id %}" class="close float-right">
                         <span aria-hidden="true">&times;</span></a>
                 </div>

@@ -19,11 +19,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
 
-                    {{ item.job_title}}
-                    {{ item.location}}
-                    {{ item.company}}
-                    {{ item.start_date}}
-                    {{ item.end_date}}
+                    {{ item.job_title}} at {{ item.company}} in {{ item.location}}, {{ item.start_date}} - {{ item.end_date}}
                     <a href="{% url 'delete_work_experience' item.id %}" class="close float-right">
                         <span aria-hidden="true">&times;</span></a>
                 </div>
