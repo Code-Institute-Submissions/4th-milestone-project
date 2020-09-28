@@ -14,4 +14,6 @@ Most spoken languages ==> https://www.babbel.com/en/magazine/the-10-most-spoken-
 Most popular coding languages ==> https://www.businessinsider.nl/most-popular-programming-languages-github-2019-11
 Top web development frameworks ==> https://www.appypie.com/top-web-development-frameworks 
 
+collectstatic error on Heroku ==> https://stackoverflow.com/questions/36665889/collectstatic-error-while-deploying-django-app-to-heroku
+
 **This repo is for educational purposes only.**
