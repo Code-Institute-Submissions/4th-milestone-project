@@ -6,5 +6,4 @@ media/profile-images
 #files
 *.sqlite3
 *__pycache__
-*.xlsx
 .env
