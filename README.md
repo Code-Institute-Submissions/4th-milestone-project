@@ -4,6 +4,16 @@ Codejob.ie is a Full Stack web application, part of my Full Stack Developer stud
 
 A live demo can be found [here](https://codejob.herokuapp.com/).
 
+In case you would like to see the website behind login in, you can login is as a candidate or recruiter:
+
+**Recruiter**
+UN: johnsmith 
+PW: 1CodeInstitute2
+
+**Candidate**
+UN: larajohnson
+PW: 1CodeInstitute2
+
 ## Project purpose:
 Build a full-stack site based around business logic used to control a centrally-owned dataset. Set up an authentication mechanism and provide paid access to the site's data and/or other activities based on the dataset, such as the purchase of a product/service.
 
@@ -121,6 +131,10 @@ Deployment
 -	Add two price plans:  
 ```Jobseekerplan (0 per month) and Recruiterplan (25 per month)```  
 -	Add API-ID’s of both plans in Django admin under Plans
+- Create an account at AWS and set up a bucket and save the following information:  
+```AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME, AWS_USERNAME```
+- Login at Heroku and add the following Config Vars under settings:  
+```AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME, AWS_USERNAME, DEBUG (false), SECRET_KEY, STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY```
 - You have successfully deployed this project to Heroku
 
 
