@@ -6,13 +6,13 @@ A live demo can be found [here](https://codejob.herokuapp.com/).
 
 In case you would like to see the website behind login in, you can login is as a candidate or recruiter:
 
-**Recruiter**
-UN: johnsmith 
-PW: 1CodeInstitute2
+**Recruiter**  
+UN: johnsmith   
+PW: 1CodeInstitute2  
 
-**Candidate**
-UN: larajohnson
-PW: 1CodeInstitute2
+**Candidate**  
+UN: larajohnson  
+PW: 1CodeInstitute2  
 
 ## Project purpose:
 Build a full-stack site based around business logic used to control a centrally-owned dataset. Set up an authentication mechanism and provide paid access to the site's data and/or other activities based on the dataset, such as the purchase of a product/service.
