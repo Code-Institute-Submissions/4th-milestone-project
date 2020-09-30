@@ -101,10 +101,13 @@
                         <h5 class="text-light">Popular Links</h5>
                         <ul class="list-unstyled">
                             <li class="text-light">
-                                <a class="text-light" href="#">All jobs</a>
+                                <a class="text-light" href="{% url 'all_jobs' %}">All jobs</a>
                             </li>
                             <li class="text-light">
-                                <a class="text-light" href="#">All candidates</a>
+                                <a class="text-light" href="{% url 'account_login' %}">Login</a>
+                            </li>   
+                            <li class="text-light">
+                                <a class="text-light" href="{% url 'account_signup' %}">Register</a>
                             </li>   
                         </ul>
                     </div>
