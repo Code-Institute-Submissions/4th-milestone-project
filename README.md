@@ -13,7 +13,7 @@ Build a full-stack site based around business logic used to control a centrally-
 
 Further requirements can be found [here](https://github.com/GitNorthWay/4th-milestone-project/tree/develop/documentation/assignment).
 
-#UX
+# UX
 While creating this web application I had user stories in mind, have chosen colors and typography wisely and made a wireframe.
 ## User stories
 For an optimal user experiences I made user stories. I also prioritized them using the MoSCoW method. 
@@ -23,14 +23,14 @@ You can download the user stories [here](https://github.com/GitNorthWay/4th-mile
 ## Colors
 In the web application there are two main colors; blue and green. Blue is often associated with depth and stability. It symbolizes trust, loyalty, wisdom and confidence. These are typically characteristics which symbolize software engineers. Green stands for growth and health. It is also seen as a refreshing and peaceful color. The association of growth matches perfectly with the goal of a job portal.
 The main colors used in the site are:
-![#007bff](https://placehold.it/15/007bff /007bff) `#007bff`
-![#6c757d](https://placehold.it/15/6c757d/6c757d) `#6c757d`
-![# 28a745](https://placehold.it/15/28a745/28a745) `#28a745`
-![#17a2b8](https://placehold.it/15/17a2b8/17a2b8) `#17a2b8`
-![#ffc107](https://placehold.it/15/ffc107/ffc107) `#ffc107`
-![#dc3545](https://placehold.it/15/dc3545/dc3545) `#dc3545`
-![#f8f9fa](https://placehold.it/15/f8f9fa/f8f9fa) `#f8f9fa `
-![#343a40](https://placehold.it/15/343a40/343a40) `#343a40`
+- ![#007bff](https://placehold.it/15/007bff/007bff) `#007bff`
+- ![#6c757d](https://placehold.it/15/6c757d/6c757d) `#6c757d`
+- ![# 28a745](https://placehold.it/15/28a745/28a745) `#28a745`
+- ![#17a2b8](https://placehold.it/15/17a2b8/17a2b8) `#17a2b8`
+- ![#ffc107](https://placehold.it/15/ffc107/ffc107) `#ffc107`
+- ![#dc3545](https://placehold.it/15/dc3545/dc3545) `#dc3545`
+- ![#f8f9fa](https://placehold.it/15/f8f9fa/f8f9fa) `#f8f9fa`
+- ![#343a40](https://placehold.it/15/343a40/343a40) `#343a40`
 
 ## Features
 I have added the following features to the web application:
@@ -91,32 +91,32 @@ You can find the database model [here](https://github.com/GitNorthWay/4th-milest
 
 # Deployment
 Deployment
--	Clone the project in the folder of your choice on your computer. Use the command in Git Bash or your IDE:
-```git clone https://github.com/GitNorthWay/4th-milestone-project.git```
--	Install Heroku CLI if you haven’t installed it yet:
-```https://devcenter.heroku.com/articles/heroku-cli```
--	Create an account at Heroku of you haven’t already one:
-```https://www.heroku.com/```
--	Login at Heroku, preferably via your IDE with the command:
-```heroku login```
--	Create an app with the command:
-```heroku create <nameapp>```
--	Check if app was created successfully:
-```heroku open```
--	Add PostgeSQL database (free version) with the command:
-```heroku addons:create heroku-postgresql:hobby-dev```
--	Push code to Heroku with the command:
-```git push heroku master```
--	Run migrations with the command:
-```heroku run python manage.py migrate```
--	Create super user to be able to access Django admin
-```heroku run python manage.py createsuperuser```
--	Create an account at Stripe and login:
-```https://www.stripe.com```
--	Add new product
-```https://dashboard.stripe.com/test/products```
--	Add two price plans:
-```Jobseekerplan (0 per month) and Recruiterplan (25 per month)```
+-	Clone the project in the folder of your choice on your computer. Use the command in Git Bash or your IDE:  
+```git clone https://github.com/GitNorthWay/4th-milestone-project.git```  
+-	Install Heroku CLI if you haven’t installed it yet:  
+```https://devcenter.heroku.com/articles/heroku-cli```  
+-	Create an account at Heroku of you haven’t already one:  
+```https://www.heroku.com/```  
+-	Login at Heroku, preferably via your IDE with the command:  
+```heroku login```  
+-	Create an app with the command:  
+```heroku create <nameapp>```  
+-	Check if app was created successfully:  
+```heroku open```  
+-	Add PostgeSQL database (free version) with the command:  
+```heroku addons:create heroku-postgresql:hobby-dev```  
+-	Push code to Heroku with the command:  
+```git push heroku master```  
+-	Run migrations with the command:  
+```heroku run python manage.py migrate```  
+-	Create super user to be able to access Django admin:  
+```heroku run python manage.py createsuperuser```  
+-	Create an account at Stripe and login:  
+```https://www.stripe.com```  
+-	Add new product:  
+```https://dashboard.stripe.com/test/products```  
+-	Add two price plans:  
+```Jobseekerplan (0 per month) and Recruiterplan (25 per month)```  
 -	Add API-ID’s of both plans in Django admin under Plans
 - You have successfully deployed this project to Heroku
 
@@ -138,7 +138,7 @@ Deployment
 # Most used languages and frameworks
 - [Most spoken languages](https://www.babbel.com/en/magazine/the-10-most-spoken-languages-in-the-world)
 - [Most popular coding languages](https://www.businessinsider.nl/most-popular-programming-languages-github-2019-11)
-- [Top web development frameworks](ttps://www.appypie.com/top-web-development-frameworks)
+- [Top web development frameworks](https://www.appypie.com/top-web-development-frameworks)
 
 
 
