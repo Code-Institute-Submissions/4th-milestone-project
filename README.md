@@ -89,6 +89,9 @@ The main backend technologies are:
 
 You can find the database model [here](https://github.com/GitNorthWay/4th-milestone-project/blob/develop/documentation/assignment/database_model_codejob.xlsx).
 
+# Testing
+All code is tested manually. HTML, CSS and JavaScript with the tools mentioned under Technologies used/Tools. Except one html error all errors are resolved. The use of MultiSelectField and/or CrispyForms causes a html validator error: 'Bad value for attribute for on element label: An ID must not be the empty string.' Due to time constraints I couldn't dive into this. Fortunately it is only a validator error and doesn't affect the site behaviour.
+
 # Deployment
 Deployment
 -	Clone the project in the folder of your choice on your computer. Use the command in Git Bash or your IDE:  
