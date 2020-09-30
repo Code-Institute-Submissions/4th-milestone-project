@@ -150,7 +150,7 @@ Deployment
 - [Abstract user](https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html)
 - [Django Decouple](https://simpleisbetterthancomplex.com/2015/11/26/package-of-the-week-python-decouple.html)
 - [Pagination](https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html)
-- [Collectstatic error on Heroku)(https://stackoverflow.com/questions/36665889/collectstatic-error-while-deploying-django-app-to-heroku)
+- [Collectstatic error on Heroku](https://stackoverflow.com/questions/36665889/collectstatic-error-while-deploying-django-app-to-heroku)
 
 # Most used languages and frameworks
 - [Most spoken languages](https://www.babbel.com/en/magazine/the-10-most-spoken-languages-in-the-world)
